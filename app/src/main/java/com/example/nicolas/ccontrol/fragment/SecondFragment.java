@@ -17,7 +17,6 @@ import com.example.nicolas.ccontrol.R;
 
 import java.util.ArrayList;
 
-
 public class SecondFragment extends ListFragment implements View.OnClickListener {
     Button addCat;
 

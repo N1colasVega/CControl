@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SQLiteDatabase mSqLiteDatabase;
     //Переменные
     Double sYear;
+    String format;
     int year;
 
     @Override
@@ -42,6 +43,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Year = (TextView) findViewById(R.id.Year);//Поле - текущий год
         sumYear = (TextView) findViewById(R.id.sumYear);//Поле - доход за год
         costYear = (TextView) findViewById(R.id.costYear);//Поле - расходы за год
+
+        format = "yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+        String dataTime = simpleDateFormat.format(new Date(System.currentTimeMillis()));
+
+        Year.setText("Год : " + dataTime);
 
         //===============================================================================
         //ОБРАБОТЧИКИ КНОПОК

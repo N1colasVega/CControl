@@ -154,23 +154,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Пример заполнения баз данных
         ContentValues values = new ContentValues();
         // Задайте значения для каждого столбца
-        values.put(DatabaseHelper.NAME1_COLUMN, "11111");
-        values.put(DatabaseHelper.NAME2_COLUMN, "111111");
-        values.put(DatabaseHelper.NAME3_COLUMN, "1111111");
+        values.put(DatabaseHelper.TITLE_COLUM, "11111");
+        values.put(DatabaseHelper.DATE_COLUM, "111111");
+        values.put(DatabaseHelper.ADRESS_COLUM, "1111111");
         // Вставляем данные в таблицу
-        mSqLiteDatabase.insert("cats", null, values);
+        mSqLiteDatabase.insert("transaction", null, values);
 
         //Пример чтения баз данных
-        Cursor cursor = mSqLiteDatabase.query("nameTabel", new String[] {DatabaseHelper.NAME1_COLUMN,
-                        DatabaseHelper.NAME2_COLUMN, DatabaseHelper.NAME3_COLUMN},
+        Cursor cursor = mSqLiteDatabase.query("nameTabel", new String[] {DatabaseHelper.TITLE_COLUM,
+                        DatabaseHelper.DATE_COLUM, DatabaseHelper.ADRESS_COLUM},
                 null, null,
                 null, null, null) ;
 
         cursor.moveToFirst();
 
-        String Name1 = cursor.getString(cursor.getColumnIndex(DatabaseHelper.NAME1_COLUMN));
-        int Name2 = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.NAME2_COLUMN));
-        int Name3 = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.NAME3_COLUMN));
+        String Name1 = cursor.getString(cursor.getColumnIndex(DatabaseHelper.TITLE_COLUM));
+        int Name2 = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.DATE_COLUM));
+        int Name3 = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.ADRESS_COLUM));
 
         //Закрываем курсор
         cursor.close();
@@ -181,15 +181,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SQLiteDatabase sqdb = db.getWritableDatabase();
 
         String insertQuery = "INSERT INTO " +
-                DatabaseHelper.DATABASE_TABLE +
-                " (" + DatabaseHelper.NAME1_COLUMN + ") VALUES ('Васька')";
+                DatabaseHelper.TABLE_TRANS +
+                " (" + DatabaseHelper.TITLE_COLUM + ") VALUES ('Васька')";
         sqdb.execSQL(insertQuery);
         // ========================================================
         //Изменение данных(Можно исопльзовать сложные условия и преобразовывать инты в строки)
         ContentValues valuese = new ContentValues();
-        values.put(DatabaseHelper.NAME1_COLUMN, "1111111");
-        mSqLiteDatabase.update(mDatabaseHelper.DATABASE_TABLE,
+        values.put(DatabaseHelper.TITLE_COLUM, "1111111");
+        mSqLiteDatabase.update(mDatabaseHelper.TABLE_TRANS,
                 valuese,
-                mDatabaseHelper.NAME1_COLUMN + "= ?", new String[]{"2222222"});
+                mDatabaseHelper.TITLE_COLUM + "= ?", new String[]{"2222222"});
     }
 }

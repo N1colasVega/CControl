@@ -5,6 +5,8 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuItem;
 
 public class diagramActivity extends FragmentActivity implements ActionBar.TabListener{
     ActionBar actionBar;
@@ -55,5 +57,24 @@ public class diagramActivity extends FragmentActivity implements ActionBar.TabLi
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //При создании меню - добавляем наше меню
+        getMenuInflater().inflate(R.menu.diagrem_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        //Действия дял пунктов меню
+        if (id == R.id.sumeItem) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

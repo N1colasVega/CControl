@@ -56,7 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
     public static final String TRANS_ID2 = "transaction_id";
     public static final String IMG_COLUM3 = "image";
     public static final String DESC_COLUM3 = "description";
-    public static final String DATE_ADD__COLUM23 = "date_added";
+    public static final String DATE_ADD__COLUM3 = "date_added";
 
     private static final String DATABASE_CREATE_TARANS_TABEL = "create table " + TABLE_TRANS + " ("
             + TRANS_ID + " integer primary key autoincrement, "
@@ -67,6 +67,28 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
             + SUM_COLUM + " decimal(10,2), "
             + ADRESS_COLUM + " varchar(255), "
             + DATE_COLUM + " datetime" + ");";
+
+    private static final String DATABASE_CREATE_CAT_TABEL = "create table " + TABLE_SOURCE + " ("
+            + CAT_ID2 + " integer primary key autoincrement, "
+            + TITLE_COLUM2 + " varchar (64) not null, "
+            + DESC_COLUM2 + " varchar(255), "
+            + IMG_COLUM + " varchar(255), "
+            + STATUS_COLUM + " tinyint(1), "
+            + DATE_ADD__COLUM + " datetime" + ");";
+
+    private static final String DATABASE_CREATE_SOURSE_TABEL = "create table " + TABLE_CAT + " ("
+            + SOURCE_ID2 + " integer primary key autoincrement, "
+            + TITLE_COLUM3 + " varchar (64) not null, "
+            + BALANCE_COLUM + " decimal(10,2), "
+            + IMG_COLUM2 + " varchar(255), "
+            + DATE_ADD__COLUM2 + " datetime" + ");";
+
+    private static final String DATABASE_CREATE_IMAGE_TABEL = "create table " + TABLE_IMAGE + " ("
+            + IMAGE_ID + " integer primary key autoincrement, "
+            + TRANS_ID2 + " integer not null foreign key, "
+            + IMG_COLUM3 + " varchar(255), "
+            + DESC_COLUM3 + " varchar(255), "
+            + DATE_ADD__COLUM3 + " datetime" + ");";
 
     //==================================================================================================
     public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -85,6 +107,9 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(DATABASE_CREATE_TARANS_TABEL); // <- Запускаем наш скрип при создании базы
+        db.execSQL(DATABASE_CREATE_CAT_TABEL);
+        db.execSQL(DATABASE_CREATE_SOURSE_TABEL);
+        db.execSQL(DATABASE_CREATE_IMAGE_TABEL);
     }
 
     @Override

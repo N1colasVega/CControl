@@ -62,33 +62,33 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
             + TRANS_ID + " integer primary key autoincrement, "
             + CAT_ID + " integer not null foreign key, "
             + SOURCE_ID + " integer not null foreign key, "
-            + TITLE_COLUM + " varchar (64) not null, "
-            + DESC_COLUM + " varchar(255), "
-            + SUM_COLUM + " decimal(10,2), "
-            + ADRESS_COLUM + " varchar(255), "
-            + DATE_COLUM + " datetime" + ");";
+            + TITLE_COLUM + " text not null, "
+            + DESC_COLUM + " text, "
+            + SUM_COLUM + " real, "
+            + ADRESS_COLUM + " text, "
+            + DATE_COLUM + " text" + ");";
 
     private static final String DATABASE_CREATE_CAT_TABEL = "create table " + TABLE_SOURCE + " ("
             + CAT_ID2 + " integer primary key autoincrement, "
-            + TITLE_COLUM2 + " varchar (64) not null, "
-            + DESC_COLUM2 + " varchar(255), "
-            + IMG_COLUM + " varchar(255), "
-            + STATUS_COLUM + " tinyint(1), "
-            + DATE_ADD__COLUM + " datetime" + ");";
+            + TITLE_COLUM2 + " text not null, "
+            + DESC_COLUM2 + " text, "
+            + IMG_COLUM + " text, "
+            + STATUS_COLUM + " integer, "
+            + DATE_ADD__COLUM + " text" + ");";
 
     private static final String DATABASE_CREATE_SOURSE_TABEL = "create table " + TABLE_CAT + " ("
             + SOURCE_ID2 + " integer primary key autoincrement, "
-            + TITLE_COLUM3 + " varchar (64) not null, "
-            + BALANCE_COLUM + " decimal(10,2), "
-            + IMG_COLUM2 + " varchar(255), "
-            + DATE_ADD__COLUM2 + " datetime" + ");";
+            + TITLE_COLUM3 + " text not null, "
+            + BALANCE_COLUM + " real, "
+            + IMG_COLUM2 + " text, "
+            + DATE_ADD__COLUM2 + " text" + ");";
 
     private static final String DATABASE_CREATE_IMAGE_TABEL = "create table " + TABLE_IMAGE + " ("
             + IMAGE_ID + " integer primary key autoincrement, "
             + TRANS_ID2 + " integer not null foreign key, "
-            + IMG_COLUM3 + " varchar(255), "
-            + DESC_COLUM3 + " varchar(255), "
-            + DATE_ADD__COLUM3 + " datetime" + ");";
+            + IMG_COLUM3 + " text, "
+            + DESC_COLUM3 + " text, "
+            + DATE_ADD__COLUM3 + " text" + ");";
 
     //==================================================================================================
     public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {

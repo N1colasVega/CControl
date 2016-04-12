@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        createBase();
+
         Year = (TextView) findViewById(R.id.Year);//Поле - текущий год
         sumYear = (TextView) findViewById(R.id.sumYear);//Поле - доход за год
         costYear = (TextView) findViewById(R.id.costYear);//Поле - расходы за год
@@ -144,6 +146,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+    public  void createBase(){
+        mDatabaseHelper = new DatabaseHelper(this, "mydatabase.db", null, 1);//используем простой конструктор(не для даунов,а простой)
+        mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
+
+        mSqLiteDatabase.close();
+
+       /* ContentValues values = new ContentValues();
+
+        values.put(DatabaseHelper.TITLE_COLUM2, "Тест имени - категория 1");
+        values.put(DatabaseHelper.DESC_COLUM2, "Тест описания - категория 1");
+        values.put(DatabaseHelper.IMG_COLUM, "Тест картинки - категория 1");
+        values.put(DatabaseHelper.STATUS_COLUM, 1);
+        values.put(DatabaseHelper.DATE_ADD__COLUM, "Тест даты(временно) - категория 1");
+
+        mSqLiteDatabase.insert("category",null,values);*/
+
+    }
+
     //ПРИМЕРЫ РАБОТЫ С БД
     public void example(){
         //СОЗДАНИЕ БАЗЫ ДАННЫХ

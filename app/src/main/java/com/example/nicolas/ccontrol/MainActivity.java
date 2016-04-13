@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -148,21 +149,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public  void createBase(){
-        mDatabaseHelper = new DatabaseHelper(this, "mydatabase.db", null, 1);//используем простой конструктор(не для даунов,а простой)
+        mDatabaseHelper = new DatabaseHelper(this, "database6.db", null, 1);//используем простой конструктор(не для даунов,а простой)
         mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
 
-        mSqLiteDatabase.close();
 
-       /* ContentValues values = new ContentValues();
+       ContentValues values = new ContentValues();
 
         values.put(DatabaseHelper.TITLE_COLUM2, "Тест имени - категория 1");
         values.put(DatabaseHelper.DESC_COLUM2, "Тест описания - категория 1");
         values.put(DatabaseHelper.IMG_COLUM, "Тест картинки - категория 1");
         values.put(DatabaseHelper.STATUS_COLUM, 1);
-        values.put(DatabaseHelper.DATE_ADD__COLUM, "Тест даты(временно) - категория 1");
+        Date c = new Date(System.currentTimeMillis());
+        long milliseconds = c.getTime();
+        values.put(DatabaseHelper.DATE_ADD__COLUM,milliseconds );
 
-        mSqLiteDatabase.insert("category",null,values);*/
+        mSqLiteDatabase.insert(DatabaseHelper.TABLE_CAT,null,values);
 
+        Cursor cursor = mSqLiteDatabase.query(DatabaseHelper.TABLE_CAT, null, null, null, null, null, null, null);
+        if(cursor.moveToFirst()){
+            int catIndex = cursor.getColumnIndex(DatabaseHelper.CAT_ID2);
+            int catName = cursor.getColumnIndex(DatabaseHelper.TITLE_COLUM2);
+            int descCat = cursor.getColumnIndex(DatabaseHelper.DESC_COLUM2);
+            int imgCat = cursor.getColumnIndex(DatabaseHelper.IMG_COLUM);
+            int statCat = cursor.getColumnIndex(DatabaseHelper.STATUS_COLUM);
+            int dateCat = cursor.getColumnIndex(DatabaseHelper.DATE_ADD__COLUM);
+            do{
+                Log.d("mLog",
+                        "ID = " + cursor.getInt(catIndex)
+                        + ", title " + cursor.getString(catName)
+                        + ", desc " + cursor.getString(descCat)
+                        + ", img " + cursor.getString(imgCat)
+                        + ", status " + cursor.getInt(statCat)
+                        + ", date " +  cursor.getLong(dateCat)
+                );
+            }while (cursor.moveToNext());
+        }else Log.d("mLog", "0 rows");
+
+        mSqLiteDatabase.close();
     }
 
     //ПРИМЕРЫ РАБОТЫ С БД

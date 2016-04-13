@@ -26,6 +26,8 @@
             android:theme="@style/Base.Theme.AppCompat.Dialog" />
         <activity android:name=".itemActivity" >
         </activity>
+        <activity android:name=".sorceActivity" >
+        </activity>
     </application>
 
 </manifest>

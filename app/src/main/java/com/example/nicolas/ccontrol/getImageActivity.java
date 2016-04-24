@@ -1,6 +1,5 @@
 package com.example.nicolas.ccontrol;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.hardware.Camera;
@@ -12,7 +11,6 @@ import android.os.Bundle;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.widget.Button;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,7 +19,6 @@ public class getImageActivity extends AppCompatActivity{
     SurfaceView surfaceView;
     Camera camera;
     MediaRecorder mediaRecorder;
-    Button btnTakePicture;
 
     File photoFile;
     //Базы данных
@@ -35,7 +32,7 @@ public class getImageActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_getimage);
+        setContentView(R.layout.activity_getimg);
 
         Intent intent = getIntent();
         id = intent.getIntExtra("idTransa",23);

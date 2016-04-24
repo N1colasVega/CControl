@@ -18,7 +18,9 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     //Объекты
@@ -29,10 +31,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //Базы данных
     private DatabaseHelper mDatabaseHelper;
     private SQLiteDatabase mSqLiteDatabase;
+    //Классы
+    controlBD bdcon = new controlBD();
     //Переменные
-    Double sYear;
     String format;
-    int year;
+    String year, month;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String dataTime = simpleDateFormat.format(new Date(System.currentTimeMillis()));
 
         Year.setText("Год : " + dataTime);
-
+        year = dataTime;
         //===============================================================================
         //ОБРАБОТЧИКИ КНОПОК
         bJanuary = (Button) findViewById(R.id.bJanuary);
@@ -120,59 +124,107 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent;
         switch (v.getId()) {//Действия кнопок
             case R.id.bJanuary:
+                month = "1";
                 intent = new Intent(this,diagramActivity.class);
-                startActivity(intent);
+                intent.putExtra("year",year);
+                intent.putExtra("month",month);
+                startActivityForResult(intent,1);
                 break;
             case R.id.bFebruary:
+                month = "2";
+                intent = new Intent(this,diagramActivity.class);
+                intent.putExtra("year",year);
+                intent.putExtra("month",month);
+                startActivityForResult(intent,1);
                 break;
             case R.id.bMarch:
+                month = "3";
+                intent = new Intent(this,diagramActivity.class);
+                intent.putExtra("year",year);
+                intent.putExtra("month",month);
+                startActivityForResult(intent,1);
                 break;
             case R.id.bApril:
+                month = "4";
+                intent = new Intent(this,diagramActivity.class);
+                intent.putExtra("year",year);
+                intent.putExtra("month",month);
+                startActivityForResult(intent,1);
                 break;
             case R.id.bMay:
+                month = "5";
+                intent = new Intent(this,diagramActivity.class);
+                intent.putExtra("year",year);
+                intent.putExtra("month",month);
+                startActivityForResult(intent,1);
                 break;
             case R.id.bJune:
+                month = "6";
+                intent = new Intent(this,diagramActivity.class);
+                intent.putExtra("year",year);
+                intent.putExtra("month",month);
+                startActivityForResult(intent,1);
                 break;
             case R.id.bJuly:
+                month = "7";
+                intent = new Intent(this,diagramActivity.class);
+                intent.putExtra("year",year);
+                intent.putExtra("month",month);
+                startActivityForResult(intent,1);
                 break;
             case R.id.bAugust:
+                month = "8";
+                intent = new Intent(this,diagramActivity.class);
+                intent.putExtra("year",year);
+                intent.putExtra("month",month);
+                startActivityForResult(intent,1);
                 break;
             case R.id.bSeptember:
+                month = "9";
+                intent = new Intent(this,diagramActivity.class);
+                intent.putExtra("year",year);
+                intent.putExtra("month",month);
+                startActivityForResult(intent,1);
                 break;
             case R.id.bOctober:
+                month = "10";
+                intent = new Intent(this,diagramActivity.class);
+                intent.putExtra("year",year);
+                intent.putExtra("month",month);
+                startActivityForResult(intent,1);
                 break;
             case R.id.bNovember:
+                month = "11";
+                intent = new Intent(this,diagramActivity.class);
+                intent.putExtra("year",year);
+                intent.putExtra("month",month);
+                startActivityForResult(intent,1);
                 break;
             case R.id.bDecember:
+                month = "12";
+                intent = new Intent(this,diagramActivity.class);
+                intent.putExtra("year",year);
+                intent.putExtra("month",month);
+                startActivityForResult(intent,1);
                 break;
         }
     }
 
     public  void createBase(){
-        mDatabaseHelper = new DatabaseHelper(this, "database6.db", null, 1);//используем простой конструктор(не для даунов,а простой)
+
+        mDatabaseHelper = new DatabaseHelper(this, "finalBase2.db", null, 1);//используем простой конструктор(не для даунов,а простой)
         mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
 
 
-       ContentValues values = new ContentValues();
-
-        values.put(DatabaseHelper.TITLE_COLUM2, "Тест имени - категория 1");
-        values.put(DatabaseHelper.DESC_COLUM2, "Тест описания - категория 1");
-        values.put(DatabaseHelper.IMG_COLUM, "Тест картинки - категория 1");
-        values.put(DatabaseHelper.STATUS_COLUM, 1);
-        Date c = new Date(System.currentTimeMillis());
-        long milliseconds = c.getTime();
-        values.put(DatabaseHelper.DATE_ADD__COLUM,milliseconds );
-
-        mSqLiteDatabase.insert(DatabaseHelper.TABLE_CAT,null,values);
-
-        Cursor cursor = mSqLiteDatabase.query(DatabaseHelper.TABLE_CAT, null, null, null, null, null, null, null);
+        Cursor cursor = mSqLiteDatabase.query(DatabaseHelper.TABLE_CAT,null, null, null, null, null, null, null);
         if(cursor.moveToFirst()){
             int catIndex = cursor.getColumnIndex(DatabaseHelper.CAT_ID2);
             int catName = cursor.getColumnIndex(DatabaseHelper.TITLE_COLUM2);
             int descCat = cursor.getColumnIndex(DatabaseHelper.DESC_COLUM2);
             int imgCat = cursor.getColumnIndex(DatabaseHelper.IMG_COLUM);
             int statCat = cursor.getColumnIndex(DatabaseHelper.STATUS_COLUM);
-            int dateCat = cursor.getColumnIndex(DatabaseHelper.DATE_ADD__COLUM);
+            int dateCat = cursor.getColumnIndex(DatabaseHelper.DATE_ADD_COLUM);
+            int locDate = cursor.getColumnIndex(DatabaseHelper.DATE_COLUM_LOCAL2);
             do{
                 Log.d("mLog",
                         "ID = " + cursor.getInt(catIndex)
@@ -180,11 +232,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         + ", desc " + cursor.getString(descCat)
                         + ", img " + cursor.getString(imgCat)
                         + ", status " + cursor.getInt(statCat)
-                        + ", date " +  cursor.getLong(dateCat)
+                        + ", date " + cursor.getLong(dateCat)
+                        + ", LocalDAte " + cursor.getString(locDate)
                 );
             }while (cursor.moveToNext());
         }else Log.d("mLog", "0 rows");
 
+        cursor = mSqLiteDatabase.query(DatabaseHelper.TABLE_TRANS,null, null, null, null, null, null, null);
+        if(cursor.moveToFirst()){
+            int transIndex = cursor.getColumnIndex(DatabaseHelper.TRANS_ID);
+            int catIndex = cursor.getColumnIndex(DatabaseHelper.CAT_ID);
+            int sourceIndex = cursor.getColumnIndex(DatabaseHelper.SOURCE_ID);
+            int transName = cursor.getColumnIndex(DatabaseHelper.TITLE_COLUM);
+            int descTrans = cursor.getColumnIndex(DatabaseHelper.DESC_COLUM);
+            int sum = cursor.getColumnIndex(DatabaseHelper.SUM_COLUM);
+            int adress = cursor.getColumnIndex(DatabaseHelper.ADRESS_COLUM);
+            int dateCat = cursor.getColumnIndex(DatabaseHelper.DATE_COLUM);
+            int locDate = cursor.getColumnIndex(DatabaseHelper.DATE_COLUM_LOCAL);
+            do{
+                Log.d("mLog",
+                        "ID = " + cursor.getInt(transIndex)
+                        +", Cat_id = " + cursor.getInt(catIndex)
+                        +", Sour_id = " + cursor.getInt(sourceIndex)
+                                + ", title " + cursor.getString(transName)
+                                + ", desc " + cursor.getString(descTrans)
+                                + ", sum " + cursor.getDouble(sum)
+                                + ", adress " + cursor.getInt(adress)
+                                + ", date " + cursor.getLong(dateCat)
+                                + ", LocalDAte " + cursor.getString(locDate)
+                );
+            }while (cursor.moveToNext());
+        }else Log.d("mLog", "0 rows");
         mSqLiteDatabase.close();
     }
 
@@ -235,5 +313,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mSqLiteDatabase.update(mDatabaseHelper.TABLE_TRANS,
                 valuese,
                 mDatabaseHelper.TITLE_COLUM + "= ?", new String[]{"2222222"});
+
+        //Пример удаления
+        mSqLiteDatabase.delete(DatabaseHelper.TABLE_CAT,"category_id = 4",null);
     }
 }

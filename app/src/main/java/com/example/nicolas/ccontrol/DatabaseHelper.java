@@ -10,7 +10,7 @@ import android.util.Log;
 //Вспомогательный класс для удобнйо работы с БД
 public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
     // имя базы данных
-    private static final String DATABASE_NAME = "database6.db";
+    private static final String DATABASE_NAME = "finalBase2.db";
     // версия базы данных
     private static final int DATABASE_VERSION = 1;
     //ПРИМЕР СОЗДАНИЕ ===================================================================
@@ -26,6 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
     public static final String SUM_COLUM = "sum";
     public static final String ADRESS_COLUM = "adress";
     public static final String DATE_COLUM = "date";
+    public static final String DATE_COLUM_LOCAL = "datelocal";
 
     // Таблица категорий
 // имя таблицы
@@ -36,7 +37,8 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
     public static final String DESC_COLUM2 = "description";
     public static final String IMG_COLUM = "image";
     public static final String STATUS_COLUM = "status";
-    public static final String DATE_ADD__COLUM = "date_added";
+    public static final String DATE_ADD_COLUM = "date_added";
+    public static final String DATE_COLUM_LOCAL2 = "datelocal";
 
     // Таблица пунктов
 // имя таблицы
@@ -46,7 +48,8 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
     public static final String TITLE_COLUM3 = "title";
     public static final String BALANCE_COLUM = "balance";
     public static final String IMG_COLUM2 = "image";
-    public static final String DATE_ADD__COLUM2 = "date_added";
+    public static final String DATE_ADD_COLUM2 = "date_added";
+    public static final String DATE_COLUM_LOCAL3 = "datelocal";
 
     // Таблица изображений
 // имя таблицы
@@ -56,7 +59,8 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
     public static final String TRANS_ID2 = "transaction_id";
     public static final String IMG_COLUM3 = "image";
     public static final String DESC_COLUM3 = "description";
-    public static final String DATE_ADD__COLUM3 = "date_added";
+    public static final String DATE_ADD_COLUM3 = "date_added";
+    public static final String DATE_COLUM_LOCAL4 = "datelocal";
 
     private static final String DATABASE_CREATE_TARNS_TABLE = "create table " + TABLE_TRANS + " ("
             + TRANS_ID + " integer primary key autoincrement,"
@@ -67,6 +71,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
             + SUM_COLUM + " real,"
             + ADRESS_COLUM + " text,"
             + DATE_COLUM + " integer,"
+            + DATE_COLUM_LOCAL + " string,"
             + "foreign key (" + SOURCE_ID + ") references " + TABLE_SOURCE + "(" + SOURCE_ID2 + "),"
             + "foreign key (" + CAT_ID + ") references " + TABLE_CAT + "(" + CAT_ID2 + "));";
 
@@ -76,21 +81,24 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
             + DESC_COLUM2 + " text,"
             + IMG_COLUM + " text,"
             + STATUS_COLUM + " integer,"
-            + DATE_ADD__COLUM + " integer" + ")";
+            + DATE_ADD_COLUM + " integer,"
+            + DATE_COLUM_LOCAL2 + " string" + ")";
 
     private static final String DATABASE_CREATE_SOURSE_TABEL = "create table " + TABLE_SOURCE + " ("
             + SOURCE_ID2 + " integer primary key autoincrement, "
             + TITLE_COLUM3 + " text,"
             + BALANCE_COLUM + " real,"
             + IMG_COLUM2 + " text,"
-            + DATE_ADD__COLUM2 + " integer" + ")";
+            + DATE_ADD_COLUM2 + " integer,"
+            + DATE_COLUM_LOCAL3 + " string" + ")";
 
     private static final String DATABASE_CREATE_IMAGE_TABEL = "create table " + TABLE_IMAGE + " ("
             + IMAGE_ID + " integer primary key autoincrement,"
             + TRANS_ID2 + " integer,"
             + IMG_COLUM3 + " text,"
             + DESC_COLUM3 + " text,"
-            + DATE_ADD__COLUM3 + " integer,"
+            + DATE_ADD_COLUM3 + " integer,"
+            + DATE_COLUM_LOCAL4 + " string,"
             + " foreign key (" + TRANS_ID2 + ") references " + TABLE_TRANS + "(" + TRANS_ID + "))";
 
     //==================================================================================================

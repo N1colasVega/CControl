@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Имя транзикции"
-        android:id="@+id/nameView"
+        android:id="@+id/nameView1"
         android:layout_alignParentTop="true" />
 
     <TextView
@@ -22,7 +22,18 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Дата транзицкии"
-        android:id="@+id/dateTextV"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
+        android:id="@+id/dateTextV1"
+        android:layout_below="@+id/nameView1"
+        android:layout_alignParentStart="true"
+        android:textSize="11dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Затраты на транзикцию"
+        android:id="@+id/costView"
+        android:layout_marginTop="29dp"
+        android:layout_below="@+id/dateTextV1"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

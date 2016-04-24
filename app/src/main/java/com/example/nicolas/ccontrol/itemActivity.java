@@ -41,7 +41,34 @@ public class itemActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         id = intent.getIntExtra("transid",23);
+        ReloadItem();
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //При создании меню - добавляем наше меню
+        getMenuInflater().inflate(R.menu.menu_item, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.changeItem:
+                break;
+            case R.id.deleteItem:
+                mDatabaseHelper = new DatabaseHelper(this, "finalBase2.db", null, 1);//используем простой конструктор(не для даунов,а простой)
+                mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
+                mSqLiteDatabase.delete(DatabaseHelper.TABLE_TRANS,"transaction_id = " + id,null);
+                mSqLiteDatabase.close();
+                finish();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void ReloadItem(){
         mDatabaseHelper = new DatabaseHelper(this, "finalBase2.db", null, 1);//используем простой конструктор(не для даунов,а простой)
         mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
 
@@ -60,25 +87,5 @@ public class itemActivity extends AppCompatActivity {
             }while (cursor.moveToNext());
         }else Log.d("mLog", "0 rows");
         mSqLiteDatabase.close();
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //При создании меню - добавляем наше меню
-        getMenuInflater().inflate(R.menu.menu_item, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        //Действия дял пунктов меню
-        if (id == R.id.sumeItem) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

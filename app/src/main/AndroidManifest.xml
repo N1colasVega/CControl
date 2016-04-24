@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.nicolas.ccontrol" >
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -29,7 +32,9 @@
         <activity
             android:name=".addItemActivity"
             android:theme="@style/Base.Theme.AppCompat.Dialog" />
-        <activity android:name=".changeItemActivity" >
+        <activity android:name=".changeItemActivity" />
+        <activity android:name=".getImageActivity" />
+        <activity android:name=".imageActivity" >
         </activity>
     </application>
 

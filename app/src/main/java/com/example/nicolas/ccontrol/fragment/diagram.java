@@ -40,7 +40,7 @@ public class diagram extends Fragment implements View.OnClickListener {
     //Классы
     controlBD bdcon = new controlBD();
     //Переменные
-    float f = 1;
+    float f = 111;
     String year, month;
 
     @Nullable
@@ -125,7 +125,7 @@ public class diagram extends Fragment implements View.OnClickListener {
                 do{
                     summa = summa + cursor.getDouble(sum);
                 }while (cursor.moveToNext());
-            }else summa = 0.0;
+            }else summa = 10.0;
             yData.add(summa.floatValue());
         }}else {
             yData.add(f);

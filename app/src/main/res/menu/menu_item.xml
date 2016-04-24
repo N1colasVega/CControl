@@ -9,6 +9,11 @@
         android:title="Изменить"
         app:showAsAction="never" />
     <item
+        android:id="@+id/imageShow"
+        android:orderInCategory="100"
+        android:title="Чек"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/deleteItem"
         android:orderInCategory="100"
         android:title="Удалить"

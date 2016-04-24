@@ -33,7 +33,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Затраты на транзикцию"
         android:id="@+id/costView"
-        android:layout_below="@+id/dateTextV1"
+        android:layout_marginTop="37dp"
+        android:layout_below="@+id/adressText"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -42,7 +43,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Описание:"
         android:id="@+id/textView4"
-        android:layout_below="@+id/adressText" />
+        android:layout_below="@+id/costView"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -60,7 +62,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Адресс:"
         android:id="@+id/adressText"
-        android:layout_below="@+id/costView"
+        android:textSize="11dp"
+        android:layout_below="@+id/dateTextV1"
         android:layout_alignParentStart="true" />
 
 </RelativeLayout>

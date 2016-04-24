@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class itemActivity extends AppCompatActivity {
 //Активити одного из пунктов списка категории
@@ -28,7 +27,7 @@ public class itemActivity extends AppCompatActivity {
     String date; //дата транзикции
     Double sumIt; //общая сумма
     String nameIt,adressIt, descIt;
-    String format;
+    String format,pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +78,17 @@ public class itemActivity extends AppCompatActivity {
                 mSqLiteDatabase.close();
                 finish();
                 break;
+            case R.id.imageShow:
+                if(pass == null){
+                    intent = new Intent(this,getImageActivity.class);
+                    intent.putExtra("idTransa",id);
+                    startActivityForResult(intent,1);}
+                else{
+                    intent = new Intent(this,imageActivity.class);
+                    intent.putExtra("idTransa",id);
+                    startActivityForResult(intent,1);
+                }
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -110,6 +120,15 @@ public class itemActivity extends AppCompatActivity {
                 adressText.setText("Адресс: " + adressIt);
             }while (cursor.moveToNext());
         }else Log.d("mLog", "0 rows");
+
+        cursor = mSqLiteDatabase.query(DatabaseHelper.TABLE_IMAGE,null, "transaction_id = " + id , null, null, null, null, null);
+        if(cursor.moveToFirst()){
+            int transImg = cursor.getColumnIndex(DatabaseHelper.IMG_COLUM3);
+            do{
+                pass = cursor.getString(transImg);
+            }while (cursor.moveToNext());
+        }else pass = null;
+
         mSqLiteDatabase.close();
     }
 }

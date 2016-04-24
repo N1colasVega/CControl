@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String format;
     String year, month;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-
     }
 
     @Override
@@ -214,7 +212,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mDatabaseHelper = new DatabaseHelper(this, "finalBase2.db", null, 1);//используем простой конструктор(не для даунов,а простой)
         mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
-
 
         Cursor cursor = mSqLiteDatabase.query(DatabaseHelper.TABLE_CAT,null, null, null, null, null, null, null);
         if(cursor.moveToFirst()){

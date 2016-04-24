@@ -33,7 +33,34 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Затраты на транзикцию"
         android:id="@+id/costView"
-        android:layout_marginTop="29dp"
         android:layout_below="@+id/dateTextV1"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Описание:"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/adressText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Текст описания"
+        android:id="@+id/descText"
+        android:textSize="15dp"
+        android:layout_below="@+id/textView4"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Адресс:"
+        android:id="@+id/adressText"
+        android:layout_below="@+id/costView"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>

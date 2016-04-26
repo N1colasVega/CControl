@@ -4,6 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/page"
-    tools:context="com.example.nicolas.ccontrol.DiagramActivity1">
+    tools:context="com.example.nicolas.ccontrol.DiagramActivity">
 
 </android.support.v4.view.ViewPager>

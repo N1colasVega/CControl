@@ -8,12 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class AddItemActivity1 extends AppCompatActivity implements View.OnClickListener {
+public class AddItemActivity extends AppCompatActivity implements View.OnClickListener {
     //Объекты
     Button addTrans;
     EditText nameEd,sumEd;
     //Классы
-    ControlBD1 bdcon = new ControlBD1();
+    ControlBD bdcon = new ControlBD();
     //Базы данных
     private DatabaseHelper mDatabaseHelper;
     private SQLiteDatabase mSqLiteDatabase;

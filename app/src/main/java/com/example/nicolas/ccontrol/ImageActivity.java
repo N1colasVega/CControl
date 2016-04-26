@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import java.io.File;
 import java.text.SimpleDateFormat;
 
-public class ImageActivity1 extends AppCompatActivity {
+public class ImageActivity extends AppCompatActivity {
     ImageView imageView;
     //Базы данных
     private DatabaseHelper mDatabaseHelper;

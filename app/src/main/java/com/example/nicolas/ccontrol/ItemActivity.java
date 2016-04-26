@@ -12,13 +12,13 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 
-public class ItemActivity1 extends AppCompatActivity {
+public class ItemActivity extends AppCompatActivity {
 //Активити одного из пунктов списка категории
     //Тут будут фоточки, само описани и так далее
     TextView dateView, nameView, costView, descText, adressText;
 
     //Классы
-    ControlBD1 bdcon = new ControlBD1();
+    ControlBD bdcon = new ControlBD();
     //Базы данных
     private DatabaseHelper mDatabaseHelper;
     private SQLiteDatabase mSqLiteDatabase;
@@ -63,7 +63,7 @@ public class ItemActivity1 extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()){
             case R.id.changeItem:
-                intent = new Intent(this,ChangeItemActivity1.class);
+                intent = new Intent(this,ChangeItemActivity.class);
                 intent.putExtra("nameIt",nameIt);
                 intent.putExtra("sumIt",sumIt);
                 intent.putExtra("adressIt",adressIt);
@@ -80,11 +80,11 @@ public class ItemActivity1 extends AppCompatActivity {
                 break;
             case R.id.imageShow:
                 if(pass == null){
-                    intent = new Intent(this,GetImageActivity1.class);
+                    intent = new Intent(this,GetImageActivity.class);
                     intent.putExtra("idTransa",id);
                     startActivityForResult(intent,1);}
                 else{
-                    intent = new Intent(this,ImageActivity1.class);
+                    intent = new Intent(this,ImageActivity.class);
                     intent.putExtra("idTransa",id);
                     startActivityForResult(intent,1);
                 }

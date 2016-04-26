@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class ChangeItemActivity1 extends AppCompatActivity implements View.OnClickListener {
+public class ChangeItemActivity extends AppCompatActivity implements View.OnClickListener {
     Button Apply, Cancel;
     EditText nameEd, sumEd, adressEd, descEd;
 

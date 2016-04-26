@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.nicolas.ccontrol.fragment.SrcFragment1;
+import com.example.nicolas.ccontrol.fragment.SrcFragment;
 
 public class SourceActivity extends AppCompatActivity {
     //Базы данных
@@ -22,9 +22,9 @@ public class SourceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sorce);
-        SrcFragment1 srcfragment = (SrcFragment1) getSupportFragmentManager().findFragmentByTag("srcfragment");
+        SrcFragment srcfragment = (SrcFragment) getSupportFragmentManager().findFragmentByTag("srcfragment");
         if(srcfragment == null){
-            srcfragment = new SrcFragment1();
+            srcfragment = new SrcFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.add(android.R.id.content, srcfragment, "stcfragment");
             transaction.commit();

@@ -5,8 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.nicolas.ccontrol.fragment.Diagram1;
-import com.example.nicolas.ccontrol.fragment.CatList1;
+import com.example.nicolas.ccontrol.fragment.Diagram;
+import com.example.nicolas.ccontrol.fragment.CatList;
 
 /**
  * Created by Nicolas on 19.03.2016.
@@ -23,12 +23,12 @@ public class FragmentPageAdapter extends FragmentPagerAdapter  {
         Bundle data = new Bundle();
         switch (position){
             case 0://Фрагмент с диаграммой
-                return  new Diagram1();
+                return  new Diagram();
             case 1://Фрагмент со списком
-                CatList1 CatList1 = new CatList1();
+                CatList CatList = new CatList();
                 data.putInt("currentPage", position + 1);
-                CatList1.setArguments(data);
-                return CatList1;
+                CatList.setArguments(data);
+                return CatList;
         }
         return null;
     }

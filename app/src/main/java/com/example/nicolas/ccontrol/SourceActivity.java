@@ -3,25 +3,27 @@ package com.example.nicolas.ccontrol;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.nicolas.ccontrol.fragment.SrcFragment;
 
 public class SourceActivity extends AppCompatActivity {
+    //Переменные
+    int id;
     //Базы данных
     private DatabaseHelper mDatabaseHelper;
     private SQLiteDatabase mSqLiteDatabase;
-    //Переменные
-    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sorce);
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         SrcFragment srcfragment = (SrcFragment) getSupportFragmentManager().findFragmentByTag("srcfragment");
         if(srcfragment == null){
             srcfragment = new SrcFragment();
@@ -51,6 +53,9 @@ public class SourceActivity extends AppCompatActivity {
                 mSqLiteDatabase.delete(DatabaseHelper.TABLE_CAT,"category_id = " + id,null);
                 mSqLiteDatabase.close();
                 finish();
+                break;
+            case android.R.id.home:
+                onBackPressed();
                 break;
         }
         return super.onOptionsItemSelected(item);

@@ -5,9 +5,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.media.MediaRecorder;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -15,24 +16,26 @@ import android.view.View;
 import java.io.File;
 import java.io.FileOutputStream;
 
-public class GetImageActivity extends AppCompatActivity{
+public class GetImageActivity extends AppCompatActivity {
     SurfaceView surfaceView;
     Camera camera;
     MediaRecorder mediaRecorder;
 
     File photoFile;
-    //Базы данных
-    private DatabaseHelper mDatabaseHelper;
-    private SQLiteDatabase mSqLiteDatabase;
     //Переменные
     int id;
     //Классы
     ControlBD bdcon = new ControlBD();
+    //Базы данных
+    private DatabaseHelper mDatabaseHelper;
+    private SQLiteDatabase mSqLiteDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_getimg);
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
         id = intent.getIntExtra("idTransa",23);
@@ -96,7 +99,7 @@ public class GetImageActivity extends AppCompatActivity{
                 }
             }
         });
-        bdcon.addImg(mSqLiteDatabase, id, "/sdcard/pictures/imagetrans" + id + ".jpg","");
+        bdcon.addImg(mSqLiteDatabase, id, "/sdcard/pictures/imagetrans" + id + ".jpg", "");
         mSqLiteDatabase.close();
     }
 
@@ -108,6 +111,15 @@ public class GetImageActivity extends AppCompatActivity{
             camera.lock();
         }
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
-
-

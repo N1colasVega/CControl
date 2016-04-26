@@ -3,8 +3,8 @@ package com.example.nicolas.ccontrol;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,26 +13,28 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 
 public class ItemActivity extends AppCompatActivity {
-//Активити одного из пунктов списка категории
+    //Активити одного из пунктов списка категории
     //Тут будут фоточки, само описани и так далее
     TextView dateView, nameView, costView, descText, adressText;
 
     //Классы
     ControlBD bdcon = new ControlBD();
-    //Базы данных
-    private DatabaseHelper mDatabaseHelper;
-    private SQLiteDatabase mSqLiteDatabase;
     //Переменные
     int id;
     String date; //дата транзикции
     Double sumIt; //общая сумма
     String nameIt,adressIt, descIt;
     String format,pass;
+    //Базы данных
+    private DatabaseHelper mDatabaseHelper;
+    private SQLiteDatabase mSqLiteDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         nameView = (TextView) findViewById(R.id.nameView1);
         dateView = (TextView) findViewById(R.id.dateTextV1);
@@ -63,7 +65,7 @@ public class ItemActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()){
             case R.id.changeItem:
-                intent = new Intent(this,ChangeItemActivity.class);
+                intent = new Intent(this, ChangeItemActivity.class);
                 intent.putExtra("nameIt",nameIt);
                 intent.putExtra("sumIt",sumIt);
                 intent.putExtra("adressIt",adressIt);
@@ -80,14 +82,17 @@ public class ItemActivity extends AppCompatActivity {
                 break;
             case R.id.imageShow:
                 if(pass == null){
-                    intent = new Intent(this,GetImageActivity.class);
+                    intent = new Intent(this, GetImageActivity.class);
                     intent.putExtra("idTransa",id);
                     startActivityForResult(intent,1);}
                 else{
-                    intent = new Intent(this,ImageActivity.class);
+                    intent = new Intent(this, ImageActivity.class);
                     intent.putExtra("idTransa",id);
                     startActivityForResult(intent,1);
                 }
+                break;
+            case android.R.id.home:
+                onBackPressed();
                 break;
         }
 

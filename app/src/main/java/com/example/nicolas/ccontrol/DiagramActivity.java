@@ -8,7 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class DiagramActivity extends FragmentActivity implements ActionBar.TabListener{
+public class DiagramActivity extends FragmentActivity implements ActionBar.TabListener {
     ActionBar actionBar;
     ViewPager viewPager;
     FragmentPageAdapter ft;
@@ -20,12 +20,16 @@ public class DiagramActivity extends FragmentActivity implements ActionBar.TabLi
         viewPager = (ViewPager) findViewById(R.id.page);
         ft = new FragmentPageAdapter(getSupportFragmentManager());
 
-        actionBar = getActionBar();
-
         viewPager.setAdapter(ft);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        actionBar.addTab(actionBar.newTab().setText("Диаграмма").setTabListener(this));
-        actionBar.addTab(actionBar.newTab().setText("Категории").setTabListener(this));
+
+        if (getActionBar() != null) {
+            actionBar = getActionBar();
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+            actionBar.addTab(actionBar.newTab().setText("Диаграмма").setTabListener(this));
+            actionBar.addTab(actionBar.newTab().setText("Категории").setTabListener(this));
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -68,13 +72,14 @@ public class DiagramActivity extends FragmentActivity implements ActionBar.TabLi
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
 
-        //Действия дял пунктов меню
-        if (id == R.id.sumeItem) {
-            return true;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            case R.id.sumeItem:
+                break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

@@ -20,12 +20,12 @@
         android:textSize="25dp" />
 
     <TableLayout
+        android:id="@+id/tableLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/Year"
-        android:layout_marginTop="29dp"
-        android:id="@+id/tableLayout">
+        android:layout_marginTop="29dp">
 
         <TableRow
             android:layout_width="match_parent"
@@ -33,24 +33,21 @@
 
             <Button
                 android:id="@+id/bJanuary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/MonthButton"
                 android:layout_column="0"
                 android:layout_weight="1"
                 android:text="@string/January" />
 
             <Button
                 android:id="@+id/bFebruary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/MonthButton"
                 android:layout_column="1"
                 android:layout_weight="1"
                 android:text="@string/February" />
 
             <Button
                 android:id="@+id/bMarch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/MonthButton"
                 android:layout_column="2"
                 android:layout_weight="1"
                 android:text="@string/March" />
@@ -62,24 +59,21 @@
 
             <Button
                 android:id="@+id/bApril"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/MonthButton"
                 android:layout_column="0"
                 android:layout_weight="1"
                 android:text="@string/April" />
 
             <Button
                 android:id="@+id/bMay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/MonthButton"
                 android:layout_column="1"
                 android:layout_weight="1"
                 android:text="@string/May" />
 
             <Button
                 android:id="@+id/bJune"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/MonthButton"
                 android:layout_column="2"
                 android:layout_weight="1"
                 android:text="@string/June" />
@@ -91,24 +85,21 @@
 
             <Button
                 android:id="@+id/bJuly"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/MonthButton"
                 android:layout_column="0"
                 android:layout_weight="1"
                 android:text="@string/July" />
 
             <Button
                 android:id="@+id/bAugust"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/MonthButton"
                 android:layout_column="1"
                 android:layout_weight="1"
                 android:text="@string/August" />
 
             <Button
                 android:id="@+id/bSeptember"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/MonthButton"
                 android:layout_column="2"
                 android:layout_weight="1"
                 android:text="@string/September" />
@@ -120,24 +111,21 @@
 
             <Button
                 android:id="@+id/bOctober"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/MonthButton"
                 android:layout_column="0"
                 android:layout_weight="1"
                 android:text="@string/October" />
 
             <Button
                 android:id="@+id/bNovember"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/MonthButton"
                 android:layout_column="1"
                 android:layout_weight="1"
                 android:text="@string/November" />
 
             <Button
                 android:id="@+id/bDecember"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/MonthButton"
                 android:layout_column="2"
                 android:layout_weight="1"
                 android:text="@string/December" />
@@ -145,20 +133,20 @@
     </TableLayout>
 
     <TextView
+        android:id="@+id/sumYear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Доходы за год : 0 грн"
-        android:id="@+id/sumYear"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/tableLayout"
-        android:layout_alignParentStart="true" />
+        android:text="Доходы за год : 0 грн"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
+        android:id="@+id/costYear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Затраты за год : 0 грн"
-        android:id="@+id/costYear"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/sumYear"
-        android:layout_alignParentStart="true" />
+        android:text="Затраты за год : 0 грн"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 </RelativeLayout>

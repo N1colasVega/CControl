@@ -8,17 +8,17 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class DiagramActivity extends FragmentActivity implements ActionBar.TabListener{
+public class DiagramActivity1 extends FragmentActivity implements ActionBar.TabListener{
     ActionBar actionBar;
     ViewPager viewPager;
-    FragmentPageAdapter ft;
+    FragmentPageAdapter1 ft;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diagram);
 
         viewPager = (ViewPager) findViewById(R.id.page);
-        ft = new FragmentPageAdapter(getSupportFragmentManager());
+        ft = new FragmentPageAdapter1(getSupportFragmentManager());
 
         actionBar = getActionBar();
 

@@ -18,9 +18,9 @@ import android.widget.Toast;
 
 import com.example.nicolas.ccontrol.DatabaseHelper;
 import com.example.nicolas.ccontrol.R;
-import com.example.nicolas.ccontrol.AddCatActivity;
+import com.example.nicolas.ccontrol.AddCatActivity1;
 import com.example.nicolas.ccontrol.SourceActivity;
-import com.example.nicolas.ccontrol.ControlBD;
+import com.example.nicolas.ccontrol.ControlBD1;
 
 import java.util.ArrayList;
 
@@ -35,7 +35,7 @@ public class catList extends ListFragment implements View.OnClickListener {
     String year, month;
     String nameCat;//Будет хранить имена категорий
     //Классы
-    ControlBD bdcon = new ControlBD();
+    ControlBD1 bdcon = new ControlBD1();
     //Массивы/Коллекции
     ArrayList<String> nameData = new ArrayList<>();//данные списка
     ArrayList<Integer> temp = new ArrayList<>();//айдишники категорий
@@ -102,7 +102,7 @@ public class catList extends ListFragment implements View.OnClickListener {
         Intent intent;
         switch (v.getId()){
             case (R.id.addBut2):
-                intent = new Intent(catList.this.getActivity(),AddCatActivity.class);
+                intent = new Intent(catList.this.getActivity(),AddCatActivity1.class);
                 intent.putExtra("getyyyy1",year);
                 intent.putExtra("getM1",month);
                 startActivityForResult(intent,1);

@@ -11,9 +11,9 @@ import com.example.nicolas.ccontrol.fragment.catList;
 /**
  * Created by Nicolas on 19.03.2016.
  */
-public class FragmentPageAdapter extends FragmentPagerAdapter  {
+public class FragmentPageAdapter1 extends FragmentPagerAdapter  {
 //ТУТ НИЧЕГО НЕ ТРОГАТЬ
-    public FragmentPageAdapter(FragmentManager fm) {
+    public FragmentPageAdapter1(FragmentManager fm) {
         super(fm);
     }
 

@@ -6,12 +6,12 @@ import android.database.sqlite.SQLiteDatabase;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ControlBD {
+public class ControlBD1 {
 
     String dataY,dataM,dataD,format,val;
     private DatabaseHelper mDatabaseHelper;
 
-    public ControlBD() {
+    public ControlBD1() {
     }
 
     public String localDate(){

@@ -8,12 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class AddCatActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddCatActivity1 extends AppCompatActivity implements View.OnClickListener {
     //Объекты
     Button Add;
     TextView catName;
     //Классы
-    ControlBD bdcon = new ControlBD();
+    ControlBD1 bdcon = new ControlBD1();
     //Базы данных
     private DatabaseHelper mDatabaseHelper;
     private SQLiteDatabase mSqLiteDatabase;

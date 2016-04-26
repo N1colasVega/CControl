@@ -28,7 +28,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
-public class diagram extends Fragment implements View.OnClickListener {
+public class Diagram1 extends Fragment implements View.OnClickListener {
     Button addBut;
     PieChart mChart;
     //Массивы/Коллекции
@@ -77,7 +77,7 @@ public class diagram extends Fragment implements View.OnClickListener {
             }
         });
 
-        Intent intent = diagram.this.getActivity().getIntent();
+        Intent intent = Diagram1.this.getActivity().getIntent();
 
         year = intent.getStringExtra("year");
         month = intent.getStringExtra("month");
@@ -97,7 +97,7 @@ public class diagram extends Fragment implements View.OnClickListener {
         boolean state = false;
         ArrayList<Integer> temp = new ArrayList<Integer>();
 
-        mDatabaseHelper = new DatabaseHelper(diagram.this.getActivity(), "finalBase2.db", null, 1);//используем простой конструктор(не для даунов,а простой)
+        mDatabaseHelper = new DatabaseHelper(Diagram1.this.getActivity(), "finalBase2.db", null, 1);//используем простой конструктор(не для даунов,а простой)
         mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
         xData.clear();
         yData.clear();
@@ -172,7 +172,7 @@ public class diagram extends Fragment implements View.OnClickListener {
         Intent intent;
         switch (v.getId()){
             case R.id.addBut:
-                intent = new Intent(diagram.this.getActivity(),AddCatActivity.class);
+                intent = new Intent(Diagram1.this.getActivity(),AddCatActivity.class);
                 intent.putExtra("getyyyy1",year);
                 intent.putExtra("getM1",month);
                 startActivityForResult(intent,1);

@@ -24,7 +24,7 @@ import com.example.nicolas.ccontrol.ControlBD;
 
 import java.util.ArrayList;
 
-public class catList extends ListFragment implements View.OnClickListener {
+public class CatList1 extends ListFragment implements View.OnClickListener {
     Button addCat;
     TextView textView;
     //Базы данных
@@ -52,7 +52,7 @@ public class catList extends ListFragment implements View.OnClickListener {
 
         addCat = (Button) view.findViewById(R.id.addBut2);
         textView = (TextView) view.findViewById(R.id.cat);
-        Intent intent = catList.this.getActivity().getIntent();
+        Intent intent = CatList1.this.getActivity().getIntent();
         addCat.setOnClickListener(this);
 
         year = intent.getStringExtra("year");
@@ -75,7 +75,7 @@ public class catList extends ListFragment implements View.OnClickListener {
     @Override//Нажатие на пункты списка
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        Intent intent = new Intent(catList.this.getActivity(),SourceActivity.class);
+        Intent intent = new Intent(CatList1.this.getActivity(),SourceActivity.class);
         intent.putExtra("catid",temp.get(position));
         intent.putExtra("catname",nameData.get(position));
         intent.putExtra("yyyy2", year);
@@ -102,7 +102,7 @@ public class catList extends ListFragment implements View.OnClickListener {
         Intent intent;
         switch (v.getId()){
             case (R.id.addBut2):
-                intent = new Intent(catList.this.getActivity(),AddCatActivity.class);
+                intent = new Intent(CatList1.this.getActivity(),AddCatActivity.class);
                 intent.putExtra("getyyyy1",year);
                 intent.putExtra("getM1",month);
                 startActivityForResult(intent,1);
@@ -113,7 +113,7 @@ public class catList extends ListFragment implements View.OnClickListener {
     private void ReloadList(){
         nameData.clear();
         temp.clear();
-        mDatabaseHelper = new DatabaseHelper(catList.this.getActivity(), "finalBase2.db", null, 1);//используем простой конструктор(не для даунов,а простой)
+        mDatabaseHelper = new DatabaseHelper(CatList1.this.getActivity(), "finalBase2.db", null, 1);//используем простой конструктор(не для даунов,а простой)
         mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
         Cursor cursor = mSqLiteDatabase.query(DatabaseHelper.TABLE_CAT,null, "datelocal like '" + year + month + "%'", null, null, null, null, null);
         if(cursor.moveToFirst()){

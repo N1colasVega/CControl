@@ -27,7 +27,7 @@ import java.util.ArrayList;
 /**
  * Created by Nicolas on 13.04.2016.
  */
-public class srcFragment extends ListFragment implements View.OnClickListener {
+public class SrcFragment1 extends ListFragment implements View.OnClickListener {
     TextView catName;
     Button addTransaction;
     //Базы данных
@@ -60,7 +60,7 @@ public class srcFragment extends ListFragment implements View.OnClickListener {
         addTransaction = (Button) view.findViewById(R.id.addTransaction);
         addTransaction.setOnClickListener(this);
 
-        Intent intent = srcFragment.this.getActivity().getIntent();
+        Intent intent = SrcFragment1.this.getActivity().getIntent();
         id = intent.getIntExtra("catid",23);
         nameCat = intent.getStringExtra("catname");
         year = intent.getStringExtra("yyyy2");
@@ -77,7 +77,7 @@ public class srcFragment extends ListFragment implements View.OnClickListener {
         ViewGroup viewGroup = (ViewGroup) v;
         TextView txt = (TextView) viewGroup.findViewById(R.id.txtitem);
         Toast.makeText(getActivity(),txt.getText().toString(),Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(srcFragment.this.getActivity(),ItemActivity.class);
+        Intent intent = new Intent(SrcFragment1.this.getActivity(),ItemActivity.class);
         intent.putExtra("transid",temp.get(position));
         startActivityForResult(intent, 1);
     }
@@ -87,7 +87,7 @@ public class srcFragment extends ListFragment implements View.OnClickListener {
         Intent intent;
         switch (v.getId()){
             case (R.id.addTransaction):
-                intent = new Intent(srcFragment.this.getActivity(),AddItemActivity.class);
+                intent = new Intent(SrcFragment1.this.getActivity(),AddItemActivity.class);
                 intent.putExtra("categoryId",id);
                 intent.putExtra("getyyyy1",year);
                 intent.putExtra("getM1",month);
@@ -99,7 +99,7 @@ public class srcFragment extends ListFragment implements View.OnClickListener {
     private void ReloadSrc(){
         temp.clear();
         dataSorce.clear();
-        mDatabaseHelper = new DatabaseHelper(srcFragment.this.getActivity(), "finalBase2.db", null, 1);//используем простой конструктор(не для даунов,а простой)
+        mDatabaseHelper = new DatabaseHelper(SrcFragment1.this.getActivity(), "finalBase2.db", null, 1);//используем простой конструктор(не для даунов,а простой)
         mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
         Cursor cursor = mSqLiteDatabase.query(DatabaseHelper.TABLE_TRANS,null, "category_id =" + id , null, null, null, null, null);
         if(cursor.moveToFirst()){

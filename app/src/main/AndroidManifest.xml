@@ -22,19 +22,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".diagramActivity"
+            android:name=".DiagramActivity"
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar" />
         <activity
-            android:name=".addCatActivity"
+            android:name=".AddCatActivity"
             android:theme="@style/Base.Theme.AppCompat.Dialog" />
-        <activity android:name=".itemActivity" />
-        <activity android:name=".sorceActivity" />
+        <activity android:name=".ItemActivity" />
+        <activity android:name=".SourceActivity" />
         <activity
-            android:name=".addItemActivity"
+            android:name=".AddItemActivity"
             android:theme="@style/Base.Theme.AppCompat.Dialog" />
-        <activity android:name=".changeItemActivity" />
-        <activity android:name=".getImageActivity" />
-        <activity android:name=".imageActivity" >
+        <activity android:name=".ChangeItemActivity" />
+        <activity android:name=".GetImageActivity" />
+        <activity android:name=".ImageActivity" >
         </activity>
     </application>
 

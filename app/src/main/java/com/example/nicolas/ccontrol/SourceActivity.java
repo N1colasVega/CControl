@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 import com.example.nicolas.ccontrol.fragment.srcFragment;
 
-public class sorceActivity extends AppCompatActivity {
+public class SourceActivity extends AppCompatActivity {
     //Базы данных
     private DatabaseHelper mDatabaseHelper;
     private SQLiteDatabase mSqLiteDatabase;

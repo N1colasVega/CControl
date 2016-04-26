@@ -7,14 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
-public class addItemActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddItemActivity extends AppCompatActivity implements View.OnClickListener {
     //Объекты
     Button addTrans;
     EditText nameEd,sumEd;
     //Классы
-    controlBD bdcon = new controlBD();
+    ControlBD bdcon = new ControlBD();
     //Базы данных
     private DatabaseHelper mDatabaseHelper;
     private SQLiteDatabase mSqLiteDatabase;

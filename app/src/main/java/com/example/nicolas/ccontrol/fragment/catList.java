@@ -18,9 +18,9 @@ import android.widget.Toast;
 
 import com.example.nicolas.ccontrol.DatabaseHelper;
 import com.example.nicolas.ccontrol.R;
-import com.example.nicolas.ccontrol.addCatActivity;
-import com.example.nicolas.ccontrol.sorceActivity;
-import com.example.nicolas.ccontrol.controlBD;
+import com.example.nicolas.ccontrol.AddCatActivity;
+import com.example.nicolas.ccontrol.SourceActivity;
+import com.example.nicolas.ccontrol.ControlBD;
 
 import java.util.ArrayList;
 
@@ -35,7 +35,7 @@ public class catList extends ListFragment implements View.OnClickListener {
     String year, month;
     String nameCat;//Будет хранить имена категорий
     //Классы
-    controlBD bdcon = new controlBD();
+    ControlBD bdcon = new ControlBD();
     //Массивы/Коллекции
     ArrayList<String> nameData = new ArrayList<>();//данные списка
     ArrayList<Integer> temp = new ArrayList<>();//айдишники категорий
@@ -75,7 +75,7 @@ public class catList extends ListFragment implements View.OnClickListener {
     @Override//Нажатие на пункты списка
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        Intent intent = new Intent(catList.this.getActivity(),sorceActivity.class);
+        Intent intent = new Intent(catList.this.getActivity(),SourceActivity.class);
         intent.putExtra("catid",temp.get(position));
         intent.putExtra("catname",nameData.get(position));
         intent.putExtra("yyyy2", year);
@@ -102,7 +102,7 @@ public class catList extends ListFragment implements View.OnClickListener {
         Intent intent;
         switch (v.getId()){
             case (R.id.addBut2):
-                intent = new Intent(catList.this.getActivity(),addCatActivity.class);
+                intent = new Intent(catList.this.getActivity(),AddCatActivity.class);
                 intent.putExtra("getyyyy1",year);
                 intent.putExtra("getM1",month);
                 startActivityForResult(intent,1);

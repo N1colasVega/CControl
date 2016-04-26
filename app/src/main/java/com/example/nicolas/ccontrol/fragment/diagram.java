@@ -14,8 +14,8 @@ import android.widget.Button;
 
 import com.example.nicolas.ccontrol.DatabaseHelper;
 import com.example.nicolas.ccontrol.R;
-import com.example.nicolas.ccontrol.addCatActivity;
-import com.example.nicolas.ccontrol.controlBD;
+import com.example.nicolas.ccontrol.AddCatActivity;
+import com.example.nicolas.ccontrol.ControlBD;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
@@ -38,7 +38,7 @@ public class diagram extends Fragment implements View.OnClickListener {
     private DatabaseHelper mDatabaseHelper;
     private SQLiteDatabase mSqLiteDatabase;
     //Классы
-    controlBD bdcon = new controlBD();
+    ControlBD bdcon = new ControlBD();
     //Переменные
     float f = 111;
     String year, month;
@@ -172,7 +172,7 @@ public class diagram extends Fragment implements View.OnClickListener {
         Intent intent;
         switch (v.getId()){
             case R.id.addBut:
-                intent = new Intent(diagram.this.getActivity(),addCatActivity.class);
+                intent = new Intent(diagram.this.getActivity(),AddCatActivity.class);
                 intent.putExtra("getyyyy1",year);
                 intent.putExtra("getM1",month);
                 startActivityForResult(intent,1);

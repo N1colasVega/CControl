@@ -15,7 +15,7 @@ import android.view.View;
 import java.io.File;
 import java.io.FileOutputStream;
 
-public class getImageActivity extends AppCompatActivity{
+public class GetImageActivity extends AppCompatActivity{
     SurfaceView surfaceView;
     Camera camera;
     MediaRecorder mediaRecorder;
@@ -27,7 +27,7 @@ public class getImageActivity extends AppCompatActivity{
     //Переменные
     int id;
     //Классы
-    controlBD bdcon = new controlBD();
+    ControlBD bdcon = new ControlBD();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -18,9 +18,9 @@ import android.widget.Toast;
 
 import com.example.nicolas.ccontrol.DatabaseHelper;
 import com.example.nicolas.ccontrol.R;
-import com.example.nicolas.ccontrol.addItemActivity;
-import com.example.nicolas.ccontrol.controlBD;
-import com.example.nicolas.ccontrol.itemActivity;
+import com.example.nicolas.ccontrol.AddItemActivity;
+import com.example.nicolas.ccontrol.ControlBD;
+import com.example.nicolas.ccontrol.ItemActivity;
 
 import java.util.ArrayList;
 
@@ -38,7 +38,7 @@ public class srcFragment extends ListFragment implements View.OnClickListener {
     String nameCat;//Будет хранить имена категорий
     String year, month;
     //Классы
-    controlBD bdcon = new controlBD();
+    ControlBD bdcon = new ControlBD();
     //Массивы/Коллекции
     ArrayList<String> dataSorce = new ArrayList<>();
     ArrayList<Integer> temp = new ArrayList<>();//айдишники элементов
@@ -77,7 +77,7 @@ public class srcFragment extends ListFragment implements View.OnClickListener {
         ViewGroup viewGroup = (ViewGroup) v;
         TextView txt = (TextView) viewGroup.findViewById(R.id.txtitem);
         Toast.makeText(getActivity(),txt.getText().toString(),Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(srcFragment.this.getActivity(),itemActivity.class);
+        Intent intent = new Intent(srcFragment.this.getActivity(),ItemActivity.class);
         intent.putExtra("transid",temp.get(position));
         startActivityForResult(intent, 1);
     }
@@ -87,7 +87,7 @@ public class srcFragment extends ListFragment implements View.OnClickListener {
         Intent intent;
         switch (v.getId()){
             case (R.id.addTransaction):
-                intent = new Intent(srcFragment.this.getActivity(),addItemActivity.class);
+                intent = new Intent(srcFragment.this.getActivity(),AddItemActivity.class);
                 intent.putExtra("categoryId",id);
                 intent.putExtra("getyyyy1",year);
                 intent.putExtra("getM1",month);

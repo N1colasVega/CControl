@@ -8,7 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class diagramActivity extends FragmentActivity implements ActionBar.TabListener{
+public class DiagramActivity extends FragmentActivity implements ActionBar.TabListener{
     ActionBar actionBar;
     ViewPager viewPager;
     FragmentPageAdapter ft;

@@ -18,9 +18,7 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     //Объекты
@@ -32,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DatabaseHelper mDatabaseHelper;
     private SQLiteDatabase mSqLiteDatabase;
     //Классы
-    controlBD bdcon = new controlBD();
+    ControlBD bdcon = new ControlBD();
     //Переменные
     String format;
     String year, month;
@@ -123,84 +121,84 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {//Действия кнопок
             case R.id.bJanuary:
                 month = "1";
-                intent = new Intent(this,diagramActivity.class);
+                intent = new Intent(this,DiagramActivity.class);
                 intent.putExtra("year",year);
                 intent.putExtra("month",month);
                 startActivityForResult(intent,1);
                 break;
             case R.id.bFebruary:
                 month = "2";
-                intent = new Intent(this,diagramActivity.class);
+                intent = new Intent(this,DiagramActivity.class);
                 intent.putExtra("year",year);
                 intent.putExtra("month",month);
                 startActivityForResult(intent,1);
                 break;
             case R.id.bMarch:
                 month = "3";
-                intent = new Intent(this,diagramActivity.class);
+                intent = new Intent(this,DiagramActivity.class);
                 intent.putExtra("year",year);
                 intent.putExtra("month",month);
                 startActivityForResult(intent,1);
                 break;
             case R.id.bApril:
                 month = "4";
-                intent = new Intent(this,diagramActivity.class);
+                intent = new Intent(this,DiagramActivity.class);
                 intent.putExtra("year",year);
                 intent.putExtra("month",month);
                 startActivityForResult(intent,1);
                 break;
             case R.id.bMay:
                 month = "5";
-                intent = new Intent(this,diagramActivity.class);
+                intent = new Intent(this,DiagramActivity.class);
                 intent.putExtra("year",year);
                 intent.putExtra("month",month);
                 startActivityForResult(intent,1);
                 break;
             case R.id.bJune:
                 month = "6";
-                intent = new Intent(this,diagramActivity.class);
+                intent = new Intent(this,DiagramActivity.class);
                 intent.putExtra("year",year);
                 intent.putExtra("month",month);
                 startActivityForResult(intent,1);
                 break;
             case R.id.bJuly:
                 month = "7";
-                intent = new Intent(this,diagramActivity.class);
+                intent = new Intent(this,DiagramActivity.class);
                 intent.putExtra("year",year);
                 intent.putExtra("month",month);
                 startActivityForResult(intent,1);
                 break;
             case R.id.bAugust:
                 month = "8";
-                intent = new Intent(this,diagramActivity.class);
+                intent = new Intent(this,DiagramActivity.class);
                 intent.putExtra("year",year);
                 intent.putExtra("month",month);
                 startActivityForResult(intent,1);
                 break;
             case R.id.bSeptember:
                 month = "9";
-                intent = new Intent(this,diagramActivity.class);
+                intent = new Intent(this,DiagramActivity.class);
                 intent.putExtra("year",year);
                 intent.putExtra("month",month);
                 startActivityForResult(intent,1);
                 break;
             case R.id.bOctober:
                 month = "10";
-                intent = new Intent(this,diagramActivity.class);
+                intent = new Intent(this,DiagramActivity.class);
                 intent.putExtra("year",year);
                 intent.putExtra("month",month);
                 startActivityForResult(intent,1);
                 break;
             case R.id.bNovember:
                 month = "11";
-                intent = new Intent(this,diagramActivity.class);
+                intent = new Intent(this,DiagramActivity.class);
                 intent.putExtra("year",year);
                 intent.putExtra("month",month);
                 startActivityForResult(intent,1);
                 break;
             case R.id.bDecember:
                 month = "12";
-                intent = new Intent(this,diagramActivity.class);
+                intent = new Intent(this,DiagramActivity.class);
                 intent.putExtra("year",year);
                 intent.putExtra("month",month);
                 startActivityForResult(intent,1);

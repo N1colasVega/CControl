@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     //Переменные
     String format;
     String year, month;
+    Double ysum;
     //Базы данных
     private DatabaseHelper mDatabaseHelper;
     private SQLiteDatabase mSqLiteDatabase;
@@ -37,13 +38,19 @@ public class MainActivity extends AppCompatActivity {
         Year = (TextView) findViewById(R.id.Year);//Поле - текущий год
         sumYear = (TextView) findViewById(R.id.sumYear);//Поле - доход за год
         costYear = (TextView) findViewById(R.id.costYear);//Поле - расходы за год
-
         format = "yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
         String dataTime = simpleDateFormat.format(new Date(System.currentTimeMillis()));
 
         Year.setText("Год : " + dataTime);
         year = dataTime;
+        updateYear();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        updateYear();
     }
 
     @Override
@@ -205,61 +212,45 @@ public class MainActivity extends AppCompatActivity {
                 );
             }while (cursor.moveToNext());
         }else Log.d("mLog", "0 rows");
+
+        cursor = mSqLiteDatabase.query(DatabaseHelper.TABLE_IMAGE,null,null,null,null,null,null,null);
+        if(cursor.moveToNext()){
+            int imgIndex = cursor.getColumnIndex(DatabaseHelper.IMAGE_ID);
+            int tranIndex = cursor.getColumnIndex(DatabaseHelper.TRANS_ID2);
+            int img = cursor.getColumnIndex(DatabaseHelper.IMG_COLUM3);
+            int desc = cursor.getColumnIndex(DatabaseHelper.DESC_COLUM3);
+            int date = cursor.getColumnIndex(DatabaseHelper.DATE_ADD_COLUM3);
+            int dateL = cursor.getColumnIndex(DatabaseHelper.DATE_COLUM_LOCAL4);
+            do {
+                Log.d("mLog",
+                        "ID = " + cursor.getInt(imgIndex)
+                                +", Trans_id = " + cursor.getInt(tranIndex)
+                                +", Img = " + cursor.getString(img)
+                                + ", desc " + cursor.getString(desc)
+                                + ", date " + cursor.getString(date)
+                                + ", LocalDAte " + cursor.getString(dateL));
+            }while (cursor.moveToNext());
+        }else Log.d("mLog","IMGE_TABEL 0 rows!!!!");
+
         mSqLiteDatabase.close();
     }
 
-    //ПРИМЕРЫ РАБОТЫ С БД
-    public void example(){
-        //СОЗДАНИЕ БАЗЫ ДАННЫХ
-        //юзаем конструктор
-        mDatabaseHelper = new DatabaseHelper(this, "mydatabase.db", null, 1);//используем простой конструктор(не для даунов,а простой)
-        //присваиваем базу
+    private  void updateYear(){
+        ysum = 0.0;
+        mDatabaseHelper = new DatabaseHelper(this, "finalBase2.db", null, 1);//используем простой конструктор(не для даунов,а простой)
         mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
-        //Пример заполнения баз данных
-        ContentValues values = new ContentValues();
-        // Задайте значения для каждого столбца
-        values.put(DatabaseHelper.TITLE_COLUM, "11111");
-        values.put(DatabaseHelper.DATE_COLUM, "111111");
-        values.put(DatabaseHelper.ADRESS_COLUM, "1111111");
-        // Вставляем данные в таблицу
-        mSqLiteDatabase.insert("transaction", null, values);
+        Cursor cursor = mSqLiteDatabase.query(DatabaseHelper.TABLE_TRANS,null,"datelocal like '" + year + "%'", null, null, null, null, null);
+        if(cursor.moveToFirst()){
+            int catSum = cursor.getColumnIndex(DatabaseHelper.SUM_COLUM);
+            do{
 
-        //Пример чтения баз данных
-        Cursor cursor = mSqLiteDatabase.query("nameTabel", new String[] {DatabaseHelper.TITLE_COLUM,
-                        DatabaseHelper.DATE_COLUM, DatabaseHelper.ADRESS_COLUM},
-                null, null,
-                null, null, null) ;
+              ysum = ysum + cursor.getDouble(catSum);
+            }while (cursor.moveToNext());
+        }else ysum = 0.0;
+        sumYear.setText("Доходы за год: " + ysum);
+        mSqLiteDatabase.close();
 
-        cursor.moveToFirst();
-
-        String Name1 = cursor.getString(cursor.getColumnIndex(DatabaseHelper.TITLE_COLUM));
-        int Name2 = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.DATE_COLUM));
-        int Name3 = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.ADRESS_COLUM));
-
-        //Закрываем курсор
-        cursor.close();
-
-        //Второй способ добавления данных(Прямой запрос)
-        // ========================================================
-        DatabaseHelper db = new DatabaseHelper(this);
-        SQLiteDatabase sqdb = db.getWritableDatabase();
-
-        String insertQuery = "INSERT INTO " +
-                DatabaseHelper.TABLE_TRANS +
-                " (" + DatabaseHelper.TITLE_COLUM + ") VALUES ('Васька')";
-        sqdb.execSQL(insertQuery);
-        // ========================================================
-        //Изменение данных(Можно исопльзовать сложные условия и преобразовывать инты в строки)
-        ContentValues valuese = new ContentValues();
-        values.put(DatabaseHelper.TITLE_COLUM, "1111111");
-        mSqLiteDatabase.update(mDatabaseHelper.TABLE_TRANS,
-                valuese,
-                mDatabaseHelper.TITLE_COLUM + "= ?", new String[]{"2222222"});
-
-        //Пример удаления
-        mSqLiteDatabase.delete(DatabaseHelper.TABLE_CAT,"category_id = 4",null);
     }
-
     public void aboutAppButton(View view) {
         startActivity(new Intent(this, AboutAppActivity.class));
     }

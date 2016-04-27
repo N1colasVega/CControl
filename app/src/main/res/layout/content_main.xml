@@ -138,7 +138,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tableLayout"
-        android:text="Доходы за год : 0 грн"
+        android:text="Доходы за год: 0 грн"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -147,6 +147,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/sumYear"
-        android:text="Затраты за год : 0 грн"
+        android:text="Затраты за год: 0 грн"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 </RelativeLayout>

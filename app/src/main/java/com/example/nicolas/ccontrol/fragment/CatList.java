@@ -31,7 +31,6 @@ public class CatList extends ListFragment implements View.OnClickListener {
     private DatabaseHelper mDatabaseHelper;
     private SQLiteDatabase mSqLiteDatabase;
     //Переменные
-    float f = 1;
     String year, month;
     String nameCat;//Будет хранить имена категорий
     //Классы
@@ -81,8 +80,6 @@ public class CatList extends ListFragment implements View.OnClickListener {
         intent.putExtra("yyyy2", year);
         intent.putExtra("M2", month);
         startActivityForResult(intent, 1);
-        //тестовый "тост"
-        Toast.makeText(getActivity(), "position" + position, Toast.LENGTH_SHORT).show();
     }
 
     @Override

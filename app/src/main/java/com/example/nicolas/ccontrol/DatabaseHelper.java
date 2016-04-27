@@ -115,17 +115,8 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public static final String TABLE_CONTACTS = "contacts";
-
-    public static final String KEY_ID = "_id";
-    public static final String KAY_NAME = "name";
-    public static final String KAY_MAIL = "mail";
-
     @Override
     public void onCreate(SQLiteDatabase db) {
-        /*db.execSQL("create table " + TABLE_CONTACTS + "(" + KEY_ID
-                + " integer primary key," + KAY_NAME + " text," + KAY_MAIL + " text" + ")");*/
-
         db.execSQL(DATABASE_CREATE_CAT_TABEL);// <- Запускаем наш скрип при создании базы
         db.execSQL(DATABASE_CREATE_SOURSE_TABEL);
         db.execSQL(DATABASE_CREATE_TARNS_TABLE);
@@ -137,7 +128,6 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
         //Это при обнове базы, елси к примеру мы захотим добавить новые колонки в таблицы
         // Запишем в журнал
         Log.w("SQLite", "Обновляемся с версии " + oldVersion + " на версию " + newVersion);//Это для логов
-
         // Удаляем старую таблицу и создаём новую
         db.execSQL("DROP TABLE IF IT EXISTS " + DATABASE_CREATE_TARNS_TABLE);
         // Создаём новую таблицу

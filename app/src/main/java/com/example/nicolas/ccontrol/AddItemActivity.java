@@ -32,8 +32,8 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         sumEd = (EditText) findViewById(R.id.sumOfTrans);
 
         Intent intent = getIntent();
-        year = intent.getStringExtra("yyyy2");
-        month = intent.getStringExtra("M2");
+        year = intent.getStringExtra("getyyyy1");
+        month = intent.getStringExtra("getM1");
         id = intent.getIntExtra("categoryId",23);
 
         addTrans.setOnClickListener(this);
@@ -47,7 +47,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                 mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
                 name = nameEd.getText().toString();
                 sum =  Double.parseDouble(sumEd.getText().toString());
-                bdcon.addTrans(mSqLiteDatabase,id,1,name,"",sum,"",year,month);
+                bdcon.addTrans(mSqLiteDatabase, id, 1, name, "", sum, "", year, month);
                 finish();
                 break;
         }

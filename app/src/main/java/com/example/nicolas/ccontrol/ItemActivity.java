@@ -81,15 +81,15 @@ public class ItemActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.imageShow:
-                if(pass == null){
+                /*if(pass == null){
                     intent = new Intent(this, GetImageActivity.class);
                     intent.putExtra("idTransa",id);
                     startActivityForResult(intent,1);}
-                else{
+                else{}*/
                     intent = new Intent(this, ImageActivity.class);
                     intent.putExtra("idTransa",id);
                     startActivityForResult(intent,1);
-                }
+
                 break;
             case android.R.id.home:
                 onBackPressed();

@@ -84,7 +84,7 @@ public class ControlBD {
     public void addImg(SQLiteDatabase mSqLiteDatabase,int transid,String img, String desc){
         ContentValues values = new ContentValues();
 
-        values.put(DatabaseHelper.TITLE_COLUM2, transid);
+        values.put(DatabaseHelper.TRANS_ID2, transid);
         values.put(DatabaseHelper.IMG_COLUM3, img);
         values.put(DatabaseHelper.DESC_COLUM3, desc);
         Date c = new Date(System.currentTimeMillis());

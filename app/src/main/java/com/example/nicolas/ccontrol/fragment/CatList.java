@@ -16,11 +16,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.nicolas.ccontrol.DatabaseHelper;
+import com.example.nicolas.ccontrol.data_base_control.DatabaseHelper;
 import com.example.nicolas.ccontrol.R;
-import com.example.nicolas.ccontrol.AddCatActivity;
+import com.example.nicolas.ccontrol.add_delete.AddCatActivity;
 import com.example.nicolas.ccontrol.SourceActivity;
-import com.example.nicolas.ccontrol.ControlBD;
+import com.example.nicolas.ccontrol.data_base_control.ControlBD;
 
 import java.util.ArrayList;
 
@@ -80,12 +80,6 @@ public class CatList extends ListFragment implements View.OnClickListener {
         intent.putExtra("yyyy2", year);
         intent.putExtra("M2", month);
         startActivityForResult(intent, 1);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        //Для возвращения данных, скорее всего не пригодится,но оставим пока
     }
 
     @Override

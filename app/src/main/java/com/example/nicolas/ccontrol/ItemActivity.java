@@ -10,6 +10,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.nicolas.ccontrol.add_delete.DeleteCatActivity;
+import com.example.nicolas.ccontrol.add_delete.DeleteItemActivity;
+import com.example.nicolas.ccontrol.data_base_control.ControlBD;
+import com.example.nicolas.ccontrol.data_base_control.DatabaseHelper;
+
 import java.text.SimpleDateFormat;
 
 public class ItemActivity extends AppCompatActivity {
@@ -48,8 +53,8 @@ public class ItemActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
+    protected void onResume() {
+        super.onResume();
         ReloadItem();
     }
 
@@ -74,29 +79,27 @@ public class ItemActivity extends AppCompatActivity {
                 startActivityForResult(intent,1);
                 break;
             case R.id.deleteItem:
-                mDatabaseHelper = new DatabaseHelper(this, "finalBase2.db", null, 1);//используем простой конструктор(не для даунов,а простой)
-                mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
-                mSqLiteDatabase.delete(DatabaseHelper.TABLE_TRANS,"transaction_id = " + id,null);
-                mSqLiteDatabase.close();
-                finish();
+                intent = new Intent(this,DeleteItemActivity.class);
+                intent.putExtra("item2ID", id);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.imageShow:
-                /*if(pass == null){
-                    intent = new Intent(this, GetImageActivity.class);
-                    intent.putExtra("idTransa",id);
-                    startActivityForResult(intent,1);}
-                else{}*/
                     intent = new Intent(this, ImageActivity.class);
                     intent.putExtra("idTransa",id);
                     startActivityForResult(intent,1);
-
                 break;
             case android.R.id.home:
                 onBackPressed();
                 break;
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(data == null)return;
+        if(data.getIntExtra("deletestate",0) == 1) finish();
     }
 
     private void ReloadItem(){

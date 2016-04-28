@@ -1,6 +1,5 @@
 package com.example.nicolas.ccontrol;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,6 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.nicolas.ccontrol.data_base_control.ControlBD;
+import com.example.nicolas.ccontrol.data_base_control.DatabaseHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -247,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
               ysum = ysum + cursor.getDouble(catSum);
             }while (cursor.moveToNext());
         }else ysum = 0.0;
-        sumYear.setText("Доходы за год: " + ysum);
+        costYear.setText("Расходы за год: " + ysum);
         mSqLiteDatabase.close();
 
     }

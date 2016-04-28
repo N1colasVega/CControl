@@ -5,7 +5,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.nicolas.ccontrol.AddItemActivity">
+    tools:context="com.example.nicolas.ccontrol.add_delete.AddItemActivity">
 
     <Button
         android:layout_width="wrap_content"

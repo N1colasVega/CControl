@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.nicolas.ccontrol.data_base_control.DatabaseHelper;
+
 public class ChangeItemActivity extends AppCompatActivity implements View.OnClickListener {
     Button Apply, Cancel;
     EditText nameEd, sumEd, adressEd, descEd;

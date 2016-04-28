@@ -16,10 +16,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.nicolas.ccontrol.DatabaseHelper;
+import com.example.nicolas.ccontrol.data_base_control.DatabaseHelper;
 import com.example.nicolas.ccontrol.R;
-import com.example.nicolas.ccontrol.AddItemActivity;
-import com.example.nicolas.ccontrol.ControlBD;
+import com.example.nicolas.ccontrol.add_delete.AddItemActivity;
+import com.example.nicolas.ccontrol.data_base_control.ControlBD;
 import com.example.nicolas.ccontrol.ItemActivity;
 
 import java.util.ArrayList;
@@ -78,7 +78,7 @@ public class SrcFragment extends ListFragment implements View.OnClickListener {
         TextView txt = (TextView) viewGroup.findViewById(R.id.txtitem);
         Toast.makeText(getActivity(),txt.getText().toString(),Toast.LENGTH_LONG).show();
         Intent intent = new Intent(SrcFragment.this.getActivity(),ItemActivity.class);
-        intent.putExtra("transid",temp.get(position));
+        intent.putExtra("transid", temp.get(position));
         startActivityForResult(intent, 1);
     }
 

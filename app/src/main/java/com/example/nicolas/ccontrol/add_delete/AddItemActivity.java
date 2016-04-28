@@ -1,4 +1,4 @@
-package com.example.nicolas.ccontrol;
+package com.example.nicolas.ccontrol.add_delete;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.nicolas.ccontrol.data_base_control.ControlBD;
+import com.example.nicolas.ccontrol.data_base_control.DatabaseHelper;
+import com.example.nicolas.ccontrol.R;
 
 public class AddItemActivity extends AppCompatActivity implements View.OnClickListener {
     //Объекты

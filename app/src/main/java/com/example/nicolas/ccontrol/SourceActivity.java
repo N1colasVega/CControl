@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.nicolas.ccontrol.add_delete.DeleteCatActivity;
@@ -17,7 +18,6 @@ import com.example.nicolas.ccontrol.fragment.SrcFragment;
 public class SourceActivity extends AppCompatActivity {
     //Переменные
     int id;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -9,7 +9,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.nicolas.ccontrol.data_base_control.ControlBD;
 import com.example.nicolas.ccontrol.data_base_control.DatabaseHelper;
@@ -17,7 +21,7 @@ import com.example.nicolas.ccontrol.data_base_control.DatabaseHelper;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     //Объекты
     TextView Year,sumYear,costYear;
     //Классы
@@ -34,17 +38,26 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        format = "yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+        String dataTime = simpleDateFormat.format(new Date(System.currentTimeMillis()));
 
+        ArrayAdapter<?> adapter = ArrayAdapter.createFromResource(this, R.array.years, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        spinner.setAdapter(adapter);
+        spinner.setPrompt("Год");
+        ArrayAdapter adapter1 = (ArrayAdapter) spinner.getAdapter();
+        spinner.setSelection(adapter1.getPosition(dataTime));
+        spinner.setOnItemSelectedListener(this);
+
+        mDatabaseHelper = new DatabaseHelper(this, "finalBase2.db", null, 1);
         createBase();
 
         Year = (TextView) findViewById(R.id.Year);//Поле - текущий год
         sumYear = (TextView) findViewById(R.id.sumYear);//Поле - доход за год
         costYear = (TextView) findViewById(R.id.costYear);//Поле - расходы за год
-        format = "yyyy";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
-        String dataTime = simpleDateFormat.format(new Date(System.currentTimeMillis()));
 
-        Year.setText("Год : " + dataTime);
         year = dataTime;
         updateYear();
     }
@@ -163,8 +176,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public  void createBase(){
-
-        mDatabaseHelper = new DatabaseHelper(this, "finalBase2.db", null, 1);//используем простой конструктор(не для даунов,а простой)
         mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
 
         Cursor cursor = mSqLiteDatabase.query(DatabaseHelper.TABLE_CAT,null, null, null, null, null, null, null);
@@ -239,13 +250,11 @@ public class MainActivity extends AppCompatActivity {
 
     private  void updateYear(){
         ysum = 0.0;
-        mDatabaseHelper = new DatabaseHelper(this, "finalBase2.db", null, 1);//используем простой конструктор(не для даунов,а простой)
         mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
         Cursor cursor = mSqLiteDatabase.query(DatabaseHelper.TABLE_TRANS,null,"datelocal like '" + year + "%'", null, null, null, null, null);
         if(cursor.moveToFirst()){
             int catSum = cursor.getColumnIndex(DatabaseHelper.SUM_COLUM);
             do{
-
               ysum = ysum + cursor.getDouble(catSum);
             }while (cursor.moveToNext());
         }else ysum = 0.0;
@@ -255,5 +264,17 @@ public class MainActivity extends AppCompatActivity {
     }
     public void aboutAppButton(View view) {
         startActivity(new Intent(this, AboutAppActivity.class));
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String[] choose = getResources().getStringArray(R.array.years);
+        year = choose[position];
+        updateYear();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

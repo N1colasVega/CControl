@@ -7,15 +7,22 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nicolas.ccontrol.add_delete.DeleteCatActivity;
+import com.example.nicolas.ccontrol.add_delete.DeleteItemActivity;
 import com.example.nicolas.ccontrol.data_base_control.DatabaseHelper;
 import com.example.nicolas.ccontrol.R;
 import com.example.nicolas.ccontrol.add_delete.AddCatActivity;
@@ -27,6 +34,7 @@ import java.util.ArrayList;
 public class CatList extends ListFragment implements View.OnClickListener {
     Button addCat;
     TextView textView;
+    ListView listView;
     //Базы данных
     private DatabaseHelper mDatabaseHelper;
     private SQLiteDatabase mSqLiteDatabase;
@@ -43,6 +51,7 @@ public class CatList extends ListFragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        registerForContextMenu(getListView());
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,6 +67,35 @@ public class CatList extends ListFragment implements View.OnClickListener {
         month = intent.getStringExtra("month");
         ReloadList();
         return view;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.context_cat, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        Intent intent;
+        switch (item.getItemId())
+        {
+            case R.id.edit:
+
+                break;
+            case R.id.delete:
+                int id = temp.get(info.position);
+                intent = new Intent(CatList.this.getActivity(), DeleteCatActivity.class);
+                intent.putExtra("categoryID", id);
+                startActivityForResult(intent, 1);
+                break;
+
+            default:
+                return super.onContextItemSelected(item);
+        }
+        return true;
     }
 
     @Override

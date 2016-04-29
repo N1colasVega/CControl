@@ -21,7 +21,6 @@ public class ItemActivity extends AppCompatActivity {
     //Активити одного из пунктов списка категории
     //Тут будут фоточки, само описани и так далее
     TextView dateView, nameView, costView, descText, adressText;
-
     //Классы
     ControlBD bdcon = new ControlBD();
     //Переменные

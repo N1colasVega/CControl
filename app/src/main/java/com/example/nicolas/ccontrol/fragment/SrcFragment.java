@@ -7,21 +7,29 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nicolas.ccontrol.ChangeItemActivity;
+import com.example.nicolas.ccontrol.add_delete.DeleteCatActivity;
+import com.example.nicolas.ccontrol.add_delete.DeleteItemActivity;
 import com.example.nicolas.ccontrol.data_base_control.DatabaseHelper;
 import com.example.nicolas.ccontrol.R;
 import com.example.nicolas.ccontrol.add_delete.AddItemActivity;
 import com.example.nicolas.ccontrol.data_base_control.ControlBD;
 import com.example.nicolas.ccontrol.ItemActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -37,6 +45,8 @@ public class SrcFragment extends ListFragment implements View.OnClickListener {
     int id;
     String nameCat;//Будет хранить имена категорий
     String year, month;
+    Double sumIt; //общая сумма
+    String nameIt,adressIt, descIt;
     //Классы
     ControlBD bdcon = new ControlBD();
     //Массивы/Коллекции
@@ -50,6 +60,7 @@ public class SrcFragment extends ListFragment implements View.OnClickListener {
         adapter = new ArrayAdapter<String>(getActivity(),R.layout.sorce_row,R.id.txtitem,dataSorce);
         setListAdapter(adapter);
         setRetainInstance(true);
+        registerForContextMenu(getListView());
     }
 
     @Override
@@ -70,6 +81,58 @@ public class SrcFragment extends ListFragment implements View.OnClickListener {
         ReloadSrc();
 
         return view;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.context_item, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        Intent intent;
+        switch (item.getItemId())
+        {
+            case R.id.edit:
+                mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
+
+                Cursor cursor = mSqLiteDatabase.query(DatabaseHelper.TABLE_TRANS,null, "transaction_id = " + temp.get(info.position), null, null, null, null, null);
+                if(cursor.moveToFirst()){
+                    int transName = cursor.getColumnIndex(DatabaseHelper.TITLE_COLUM);
+                    int transSum = cursor.getColumnIndex(DatabaseHelper.SUM_COLUM);
+                    int transDesc = cursor.getColumnIndex(DatabaseHelper.DESC_COLUM);
+                    int transAdress = cursor.getColumnIndex(DatabaseHelper.ADRESS_COLUM);
+                    do{
+                        nameIt = cursor.getString(transName);
+                        adressIt = cursor.getString(transAdress);
+                        descIt =  cursor.getString(transDesc);
+                        sumIt = cursor.getDouble(transSum);
+                    }while (cursor.moveToNext());
+                }else Log.d("mLog", "0 rows");
+
+                intent = new Intent(SrcFragment.this.getActivity(), ChangeItemActivity.class);
+                intent.putExtra("nameIt",nameIt);
+                intent.putExtra("sumIt",sumIt);
+                intent.putExtra("adressIt",adressIt);
+                intent.putExtra("descIt",descIt);
+                intent.putExtra("idTransa",temp.get(info.position));
+                startActivityForResult(intent,1);
+                break;
+            case R.id.delete:
+                int id = temp.get(info.position);
+                intent = new Intent(SrcFragment.this.getActivity(), DeleteItemActivity.class);
+                intent.putExtra("item2ID", id);
+                startActivityForResult(intent, 1);
+                break;
+
+            default:
+                return super.onContextItemSelected(item);
+        }
+        return true;
+
     }
 
     @Override

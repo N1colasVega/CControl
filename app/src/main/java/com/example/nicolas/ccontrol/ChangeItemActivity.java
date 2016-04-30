@@ -20,7 +20,6 @@ public class ChangeItemActivity extends AppCompatActivity implements View.OnClic
     String nameIt, adressIt, descIt;
 
     int id;
-
     //Базы данных
     private DatabaseHelper mDatabaseHelper;
     private SQLiteDatabase mSqLiteDatabase;
@@ -31,6 +30,8 @@ public class ChangeItemActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_change_item);
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mDatabaseHelper = new DatabaseHelper(this, "finalBase2.db", null, 1);
 
         Apply = (Button) findViewById(R.id.Apply);
         Cancel = (Button) findViewById(R.id.Cancel);
@@ -60,7 +61,7 @@ public class ChangeItemActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.Apply:
-                mDatabaseHelper = new DatabaseHelper(this, "finalBase2.db", null, 1);//используем простой конструктор(не для даунов,а простой)
+
                 mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
                 ContentValues valuese = new ContentValues();
                 valuese.put(DatabaseHelper.TITLE_COLUM, nameEd.getText().toString());

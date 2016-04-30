@@ -5,12 +5,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.nicolas.ccontrol.R;
 import com.example.nicolas.ccontrol.data_base_control.DatabaseHelper;
+
+import java.util.ArrayList;
 
 public class DeleteCatActivity extends AppCompatActivity implements View.OnClickListener {
     Button okDelCat,noDelCat;
@@ -20,6 +23,8 @@ public class DeleteCatActivity extends AppCompatActivity implements View.OnClick
     private SQLiteDatabase mSqLiteDatabase;
     //Переменные
     int catID;
+    //Массивы/Коллекции
+    ArrayList<Integer> temp = new ArrayList<>();//айдишники элементов
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +43,15 @@ public class DeleteCatActivity extends AppCompatActivity implements View.OnClick
 
         mDatabaseHelper = new DatabaseHelper(this, "finalBase2.db", null, 1);
         mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
-        Cursor cursor = mSqLiteDatabase.query(mDatabaseHelper.TABLE_CAT,null,"category_id = " + catID, null, null,null,null,null);
+        Cursor cursor = mSqLiteDatabase.query(DatabaseHelper.TABLE_TRANS, null, "category_id =" + catID, null, null, null, null, null);
+        if(cursor.moveToFirst()){
+            int transID = cursor.getColumnIndex(DatabaseHelper.TRANS_ID);
+            do{
+                temp.add(cursor.getInt(transID));
+            }while (cursor.moveToNext());
+        }else Log.d("mLog", "0 rows");
+
+        cursor = mSqLiteDatabase.query(mDatabaseHelper.TABLE_CAT,null,"category_id = " + catID, null, null,null,null,null);
         cursor.moveToFirst();
         int catName = cursor.getColumnIndex(DatabaseHelper.TITLE_COLUM2);
         textView.setText("Действительно удалить " + cursor.getString(catName) + "?");
@@ -53,6 +66,9 @@ public class DeleteCatActivity extends AppCompatActivity implements View.OnClick
                 mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
                 mSqLiteDatabase.delete(DatabaseHelper.TABLE_TRANS, "category_id = " + catID, null);
                 mSqLiteDatabase.delete(DatabaseHelper.TABLE_CAT, "category_id = " + catID, null);
+                for (int i = 0; i < temp.size(); i++) {
+                    mSqLiteDatabase.delete(DatabaseHelper.TABLE_IMAGE, "transaction_id = " + temp.get(i), null);
+                }
                 mSqLiteDatabase.close();
                 intent.putExtra("deletecatstate",1);
                 setResult(RESULT_OK,intent);

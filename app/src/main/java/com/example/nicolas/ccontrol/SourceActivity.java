@@ -58,6 +58,9 @@ public class SourceActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()){
             case R.id.changeCategory:
+                intent = new Intent(this,ChangeCatActivity.class);
+                intent.putExtra("categoryID2", id);
+                startActivityForResult(intent,1);
                 break;
             case R.id.deleteCategory:
                 intent = new Intent(this,DeleteCatActivity.class);

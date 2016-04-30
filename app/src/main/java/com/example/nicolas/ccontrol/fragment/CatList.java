@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nicolas.ccontrol.ChangeCatActivity;
 import com.example.nicolas.ccontrol.add_delete.DeleteCatActivity;
 import com.example.nicolas.ccontrol.add_delete.DeleteItemActivity;
 import com.example.nicolas.ccontrol.data_base_control.DatabaseHelper;
@@ -83,12 +84,15 @@ public class CatList extends ListFragment implements View.OnClickListener {
         switch (item.getItemId())
         {
             case R.id.edit:
-
+                intent = new Intent(CatList.this.getActivity(),ChangeCatActivity.class);
+                int id = temp.get(info.position);
+                intent.putExtra("categoryID2", id);
+                startActivityForResult(intent,1);
                 break;
             case R.id.delete:
-                int id = temp.get(info.position);
+                int id2 = temp.get(info.position);
                 intent = new Intent(CatList.this.getActivity(), DeleteCatActivity.class);
-                intent.putExtra("categoryID", id);
+                intent.putExtra("categoryID", id2);
                 startActivityForResult(intent, 1);
                 break;
 

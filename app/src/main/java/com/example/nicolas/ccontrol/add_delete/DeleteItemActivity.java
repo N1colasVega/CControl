@@ -51,6 +51,7 @@ public class DeleteItemActivity extends AppCompatActivity implements View.OnClic
             case R.id.okDelItem:
                 mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
                 mSqLiteDatabase.delete(DatabaseHelper.TABLE_TRANS, "transaction_id = " + itemID, null);
+                mSqLiteDatabase.delete(DatabaseHelper.TABLE_IMAGE, "transaction_id = " + itemID, null);
                 mSqLiteDatabase.close();
                 intent.putExtra("deletestate",1);
                 setResult(RESULT_OK,intent);

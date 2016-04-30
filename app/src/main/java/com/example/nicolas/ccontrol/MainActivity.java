@@ -262,6 +262,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mSqLiteDatabase.close();
 
     }
+
     public void aboutAppButton(View view) {
         startActivity(new Intent(this, AboutAppActivity.class));
     }

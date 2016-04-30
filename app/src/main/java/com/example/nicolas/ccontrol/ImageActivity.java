@@ -1,5 +1,6 @@
 package com.example.nicolas.ccontrol;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,6 +11,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,9 +32,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
     private SQLiteDatabase mSqLiteDatabase;
     //Переменные
     int id;
-    String pass;
     String mCurrentPhotoPath;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_TAKE_PHOTO = 1;
 
     @Override
@@ -47,7 +47,6 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
         getMyImeg = (Button) findViewById(R.id.getMyImg);
         getMyImeg.setOnClickListener(this);
 
-
         mDatabaseHelper = new DatabaseHelper(this, "finalBase2.db", null, 1);//используем простой конструктор(не для даунов,а простой)
         mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
 
@@ -61,6 +60,8 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
         }else mCurrentPhotoPath = null;
 
         if(mCurrentPhotoPath!=null){
+            getMyImeg.setText("Изменить");
+            galleryAddPic();
             setPic(mCurrentPhotoPath);
         }
         mSqLiteDatabase.close();
@@ -79,24 +80,28 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
         );
 
         if(mCurrentPhotoPath == null){
-            mCurrentPhotoPath = image.getAbsolutePath();
+            mCurrentPhotoPath =  image.getAbsolutePath();
             bdcon.addImg(mSqLiteDatabase, id, mCurrentPhotoPath, "");}
-        else mCurrentPhotoPath = image.getAbsolutePath();
+        else{
+            mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
+            mCurrentPhotoPath = image.getAbsolutePath();
+            ContentValues valuese = new ContentValues();
+            valuese.put(DatabaseHelper.IMG_COLUM3, mCurrentPhotoPath.toString());
+            mSqLiteDatabase.update(mDatabaseHelper.TABLE_IMAGE,valuese,"transaction_id = " + id,null);
+        }
         return image;
     }
 
     @Override
     public void onClick(View v) {
+        getMyImeg.setText("Изменить");
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            // Create the File where the photo should go
             File photoFile = null;
             try {
                 photoFile = createImageFile();
             } catch (IOException ex) {
             }
-            // Continue only if the File was successfully created
             if (photoFile != null) {
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
                         Uri.fromFile(photoFile));
@@ -115,26 +120,19 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void setPic(String Path) {
-        // Get the dimensions of the View
-        int targetW = imageView.getWidth();
-        int targetH = imageView.getHeight();
-
-        // Get the dimensions of the bitmap
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
         bmOptions.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(Path, bmOptions);
         int photoW = bmOptions.outWidth;
         int photoH = bmOptions.outHeight;
 
-        // Determine how much to scale down the image
-        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
+        int scaleFactor = Math.min(photoW/350, photoH/350);
 
-        // Decode the image file into a Bitmap sized to fill the View
         bmOptions.inJustDecodeBounds = false;
         bmOptions.inSampleSize = scaleFactor;
         bmOptions.inPurgeable = true;
 
-        Bitmap bitmap = BitmapFactory.decodeFile(Path, bmOptions);
+        Bitmap bitmap = BitmapFactory.decodeFile(Path,bmOptions);
         imageView.setImageBitmap(bitmap);
     }
 

@@ -173,6 +173,10 @@ public class SrcFragment extends ListFragment implements View.OnClickListener {
                 temp.add(cursor.getInt(transID));
             }while (cursor.moveToNext());
         }else Log.d("mLog", "0 rows");
+        cursor = mSqLiteDatabase.query(DatabaseHelper.TABLE_CAT, null, "category_id = " + id, null, null, null, null, null);
+        int catName2 = cursor.getColumnIndex(DatabaseHelper.TITLE_COLUM2);
+        cursor.moveToFirst();
+        catName.setText(cursor.getString(catName2));
         mSqLiteDatabase.close();
 
         adapter = new ArrayAdapter<String>(getActivity(),R.layout.sorce_row,R.id.txtitem,dataSorce);

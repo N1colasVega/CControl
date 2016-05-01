@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +29,8 @@ public class ChangeCatActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_cat);
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mDatabaseHelper = new DatabaseHelper(this, "finalBase2.db", null, 1);
 
@@ -71,5 +74,15 @@ public class ChangeCatActivity extends AppCompatActivity implements View.OnClick
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

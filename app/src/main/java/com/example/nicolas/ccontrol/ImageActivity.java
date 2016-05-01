@@ -12,10 +12,12 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.nicolas.ccontrol.add_delete.DeleteCatActivity;
 import com.example.nicolas.ccontrol.data_base_control.ControlBD;
 import com.example.nicolas.ccontrol.data_base_control.DatabaseHelper;
 
@@ -39,6 +41,8 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
         id = intent.getIntExtra("idTransa",23);
@@ -87,7 +91,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
             mCurrentPhotoPath = image.getAbsolutePath();
             ContentValues valuese = new ContentValues();
             valuese.put(DatabaseHelper.IMG_COLUM3, mCurrentPhotoPath.toString());
-            mSqLiteDatabase.update(mDatabaseHelper.TABLE_IMAGE,valuese,"transaction_id = " + id,null);
+            mSqLiteDatabase.update(mDatabaseHelper.TABLE_IMAGE, valuese, "transaction_id = " + id, null);
         }
         return image;
     }
@@ -142,5 +146,15 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
         Uri contentUri = Uri.fromFile(f);
         mediaScanIntent.setData(contentUri);
         this.sendBroadcast(mediaScanIntent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

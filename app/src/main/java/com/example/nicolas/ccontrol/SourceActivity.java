@@ -8,16 +8,16 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.nicolas.ccontrol.add_delete.DeleteCatActivity;
+import com.example.nicolas.ccontrol.data_base_control.DatabaseHelper;
 import com.example.nicolas.ccontrol.fragment.SrcFragment;
 
 public class SourceActivity extends AppCompatActivity {
     //Переменные
     int id;
-    //Базы данных
-    private DatabaseHelper mDatabaseHelper;
-    private SQLiteDatabase mSqLiteDatabase;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +36,18 @@ public class SourceActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(data == null)return;
+        if(data.getIntExtra("deletecatstate",0) == 1)finish();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.category_menu, menu);
         return true;
@@ -43,16 +55,17 @@ public class SourceActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         switch (item.getItemId()){
             case R.id.changeCategory:
+                intent = new Intent(this,ChangeCatActivity.class);
+                intent.putExtra("categoryID2", id);
+                startActivityForResult(intent,1);
                 break;
             case R.id.deleteCategory:
-                mDatabaseHelper = new DatabaseHelper(this, "finalBase2.db", null, 1);//используем простой конструктор(не для даунов,а простой)
-                mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
-                mSqLiteDatabase.delete(DatabaseHelper.TABLE_TRANS,"category_id = " + id,null);
-                mSqLiteDatabase.delete(DatabaseHelper.TABLE_CAT,"category_id = " + id,null);
-                mSqLiteDatabase.close();
-                finish();
+                intent = new Intent(this,DeleteCatActivity.class);
+                intent.putExtra("categoryID", id);
+                startActivityForResult(intent, 1);
                 break;
             case android.R.id.home:
                 onBackPressed();

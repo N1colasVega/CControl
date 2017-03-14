@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.nicolas.ccontrol">
+    package="com.example.nicolas.ccontrol" >
 
-    <uses-permission android:name="android.permission.CAMERA"
-    android:required="true" />
+    <uses-permission
+        android:name="android.permission.CAMERA"
+        android:required="true" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:theme="@style/AppTheme" >
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -23,17 +24,26 @@
             android:name=".DiagramActivity"
             android:theme="@style/DiagramActivityTheme" />
         <activity
-            android:name=".AddCatActivity"
+            android:name=".add_delete.AddCatActivity"
             android:theme="@style/Base.Theme.AppCompat.Dialog" />
         <activity android:name=".ItemActivity" />
         <activity android:name=".SourceActivity" />
         <activity
-            android:name=".AddItemActivity"
+            android:name=".add_delete.AddItemActivity"
             android:theme="@style/Base.Theme.AppCompat.Dialog" />
         <activity
             android:name=".AboutAppActivity"
             android:theme="@style/Base.Theme.AppCompat.Dialog" />
         <activity android:name=".ChangeItemActivity" />
         <activity android:name=".ImageActivity" />
+        <activity
+            android:name=".add_delete.DeleteCatActivity"
+            android:theme="@style/Base.Theme.AppCompat.Dialog" />
+        <activity
+            android:name=".add_delete.DeleteItemActivity"
+            android:theme="@style/Base.Theme.AppCompat.Dialog" />
+        <activity android:name=".ChangeCatActivity" >
+        </activity>
     </application>
+
 </manifest>

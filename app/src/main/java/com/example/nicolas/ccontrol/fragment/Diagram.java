@@ -11,11 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
-import com.example.nicolas.ccontrol.DatabaseHelper;
+import com.example.nicolas.ccontrol.add_delete.DeleteCatActivity;
+import com.example.nicolas.ccontrol.data_base_control.DatabaseHelper;
 import com.example.nicolas.ccontrol.R;
-import com.example.nicolas.ccontrol.AddCatActivity;
-import com.example.nicolas.ccontrol.ControlBD;
+import com.example.nicolas.ccontrol.add_delete.AddCatActivity;
+import com.example.nicolas.ccontrol.data_base_control.ControlBD;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
@@ -29,11 +31,12 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 
 public class Diagram extends Fragment implements View.OnClickListener {
-    Button addBut;
+    Button addBut, delBut;
     PieChart mChart;
     //Массивы/Коллекции
     ArrayList<Float> yData = new ArrayList<Float>();
     ArrayList<String> xData = new ArrayList<String>();
+    ArrayList<Integer> temp = new ArrayList<Integer>();
     //Базы данных
     private DatabaseHelper mDatabaseHelper;
     private SQLiteDatabase mSqLiteDatabase;
@@ -41,6 +44,8 @@ public class Diagram extends Fragment implements View.OnClickListener {
     ControlBD bdcon = new ControlBD();
     //Переменные
     float f = 111;
+    boolean stateD;
+    int categoryID;
     String year, month;
 
     @Nullable
@@ -48,8 +53,13 @@ public class Diagram extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.first_fragment, container,false);
 
+        mDatabaseHelper = new DatabaseHelper(Diagram.this.getActivity(), "finalBase2.db", null, 1);
+
         addBut = (Button) view.findViewById(R.id.addBut);
+        delBut = (Button) view.findViewById(R.id.delBut);
+        delBut.setOnClickListener(this);
         addBut.setOnClickListener(this);
+
         mChart = (PieChart) view.findViewById(R.id.chart);//Находим диаграмму
 
         mChart.setUsePercentValues(true);
@@ -69,11 +79,15 @@ public class Diagram extends Fragment implements View.OnClickListener {
             @Override
             public void onValueSelected(Entry entry, int i, Highlight highlight) {
                 if (entry == null) return;
+                stateD = true;
+                Toast.makeText(Diagram.this.getActivity(),
+                        xData.get(entry.getXIndex()) + " = " + entry.getVal(), Toast.LENGTH_SHORT).show();
+                categoryID = temp.get(entry.getXIndex());
             }
 
             @Override
             public void onNothingSelected() {
-
+            stateD = false;
             }
         });
 
@@ -95,9 +109,7 @@ public class Diagram extends Fragment implements View.OnClickListener {
 
     private void addData(){
         boolean state = false;
-        ArrayList<Integer> temp = new ArrayList<Integer>();
 
-        mDatabaseHelper = new DatabaseHelper(Diagram.this.getActivity(), "finalBase2.db", null, 1);//используем простой конструктор(не для даунов,а простой)
         mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
         xData.clear();
         yData.clear();
@@ -177,12 +189,21 @@ public class Diagram extends Fragment implements View.OnClickListener {
                 intent.putExtra("getM1",month);
                 startActivityForResult(intent,1);
                 break;
+            case R.id.delBut:
+                if(stateD) {
+                    intent = new Intent(Diagram.this.getActivity(),DeleteCatActivity.class);
+                    intent.putExtra("categoryID",categoryID);
+                    startActivityForResult(intent,1);
+                }else
+                    Toast.makeText(Diagram.this.getActivity(),"Категория не была выбрана!" , Toast.LENGTH_SHORT).show();
+                break;
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        stateD = false;
         addData();
     }
 }

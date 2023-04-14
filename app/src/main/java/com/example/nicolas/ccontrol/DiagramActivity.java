@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 public class DiagramActivity extends FragmentActivity implements ActionBar.TabListener {
     ActionBar actionBar;
@@ -18,6 +19,7 @@ public class DiagramActivity extends FragmentActivity implements ActionBar.TabLi
         setContentView(R.layout.activity_diagram);
 
         viewPager = (ViewPager) findViewById(R.id.page);
+
         ft = new FragmentPageAdapter(getSupportFragmentManager());
 
         viewPager.setAdapter(ft);

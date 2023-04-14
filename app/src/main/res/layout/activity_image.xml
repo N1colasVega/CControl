@@ -8,10 +8,10 @@
     tools:context="com.example.nicolas.ccontrol.ImageActivity">
 
     <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
         android:id="@+id/imageView"
-        android:layout_above="@+id/getMyImg"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />
 
     <Button

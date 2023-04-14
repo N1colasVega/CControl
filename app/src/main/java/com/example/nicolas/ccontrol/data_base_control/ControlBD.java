@@ -1,7 +1,9 @@
-package com.example.nicolas.ccontrol;
+package com.example.nicolas.ccontrol.data_base_control;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.example.nicolas.ccontrol.data_base_control.DatabaseHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
